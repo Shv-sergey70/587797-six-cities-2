@@ -88,7 +88,7 @@ export const MainPage = (props) => {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              ${offers.map((offer, i) => <Card
+              {offers.map((offer, i) => <Card
                 key = {offer + i}
                 offer = {offer}
               />)}
@@ -106,7 +106,8 @@ export const MainPage = (props) => {
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.oneOf([`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`])
+        title: PropTypes.oneOf([`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`]),
+        onTitleClick: PropTypes.func
       })
   )
 };

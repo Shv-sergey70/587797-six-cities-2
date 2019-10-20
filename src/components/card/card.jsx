@@ -33,7 +33,7 @@ export const Card = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">${offer.title}</a>
+        <a href="#" onClick={offer.onTitleClick}>${offer.title}</a>
       </h2>
       <p className="place-card__type">Apartment</p>
     </div>
@@ -42,6 +42,7 @@ export const Card = (props) => {
 
 Card.propTypes = {
   offer: PropTypes.shape({
-    title: PropTypes.oneOf([`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`])
+    title: PropTypes.oneOf([`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`]),
+    onTitleClick: PropTypes.func
   })
 };
