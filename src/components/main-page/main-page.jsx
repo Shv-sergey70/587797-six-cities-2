@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {Card, offerPropTypes} from "../card/card";
+import {OffersList} from "../offers-list/offers-list";
 
 export const MainPage = (props) => {
   const {offers} = props;
@@ -87,12 +88,9 @@ export const MainPage = (props) => {
                 <li className="places__option" tabIndex="0">Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {offers.map((offer, i) => <Card
-                key = {offer + i}
-                offer = {offer}
-              />)}
-            </div>
+            <OffersList
+              offers = {offers}
+            />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"> </section>

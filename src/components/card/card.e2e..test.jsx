@@ -7,18 +7,28 @@ Enzyme.configure({adapter: new Adapter()});
 
 it(`Card title success click`, () => {
   const clickHandler = jest.fn();
+  const hoverHandler = jest.fn();
 
-  const welcomeScreen = shallow(
+  const cardScreen = shallow(
       <Card
         offer = {
           {
-            title: `Wood and stone place`,
-            onTitleClick: clickHandler
+            title: `Beautiful & luxurious apartment at great location`,
+            previewImage: `/img/apartment-01.jpg`,
+            isPremium: true,
+            isFavorite: true,
+            type: `Apartment`,
+            price: 80,
+            rating: 4.5
           }
         }
+        onTitleClick = {clickHandler}
+        onCardHover = {hoverHandler}
       />);
 
-  welcomeScreen.find(`.place-card__name a`).simulate(`click`);
+  cardScreen.find(`.place-card__name a`).simulate(`click`);
+  cardScreen.find(`.cities__place-card`).simulate(`mouseover`, {hoverHandler});
 
   expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(hoverHandler).toHaveBeenCalledTimes(1);
 });
