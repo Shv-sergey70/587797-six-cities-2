@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {Card} from "../card/card";
-import {offerPropTypes} from "../app/app";
+import {Card, offerPropTypes} from "../card/card";
 
 export const MainPage = (props) => {
   const {offers} = props;

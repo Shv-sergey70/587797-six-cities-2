@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {offerPropTypes} from "../app/app";
 
 export const Card = (props) => {
   const {offer} = props;
@@ -40,6 +39,16 @@ export const Card = (props) => {
     </div>
   </article>;
 };
+
+export const offerPropTypes = PropTypes.shape({
+  title: PropTypes.oneOf([
+    `Beautiful & luxurious apartment at great location`,
+    `Wood and stone place`,
+    `Canal View Prinsengracht`,
+    `Nice, cozy, warm big bed apartment`
+  ]),
+  onTitleClick: PropTypes.func
+});
 
 Card.propTypes = {
   offer: offerPropTypes
