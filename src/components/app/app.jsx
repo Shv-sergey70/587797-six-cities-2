@@ -10,11 +10,16 @@ export const App = (props) => {
   />;
 };
 
+export const offerPropTypes = PropTypes.shape({
+  title: PropTypes.oneOf([
+    `Beautiful & luxurious apartment at great location`,
+    `Wood and stone place`,
+    `Canal View Prinsengracht`,
+    `Nice, cozy, warm big bed apartment`
+  ]),
+  onTitleClick: PropTypes.func
+});
+
 App.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.oneOf([`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`, `Nice, cozy, warm big bed apartment`]),
-        onTitleClick: PropTypes.func
-      })
-  )
+  offers: PropTypes.arrayOf(offerPropTypes)
 };
