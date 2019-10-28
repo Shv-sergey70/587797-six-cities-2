@@ -30,7 +30,7 @@ export class OffersList extends React.PureComponent {
     this.setState(() => {
       return {activeCard: activeCardData};
     });
-  };
+  }
 }
 
 OffersList.propTypes = {
