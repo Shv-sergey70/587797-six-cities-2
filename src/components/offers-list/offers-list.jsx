@@ -9,26 +9,28 @@ export class OffersList extends React.PureComponent {
     this.state = {
       activeCard: null
     };
+
+    this._onCardHover = this._onCardHover.bind(this);
   }
 
   render() {
     const {offers} = this.props;
-
-    const onCardHover = (activeCardElement) => {
-      this.setState(() => {
-        return {activeCard: activeCardElement};
-      });
-    };
 
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((offer, i) => <Card
         key = {`card=${i}`}
         offer = {offer}
         onTitleClick={() => {}}
-        onCardHover = {onCardHover}
+        onCardHover = {this._onCardHover}
       />)}
     </div>;
   }
+
+  _onCardHover(activeCardData) {
+    this.setState(() => {
+      return {activeCard: activeCardData};
+    });
+  };
 }
 
 OffersList.propTypes = {

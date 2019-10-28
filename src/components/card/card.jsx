@@ -14,8 +14,8 @@ export const Card = (props) => {
     rating
   } = offer;
 
-  return <article className="cities__place-card place-card" onMouseOver={(evt) => {
-    onCardHover(evt.currentTarget);
+  return <article className="cities__place-card place-card" onMouseOver={() => {
+    onCardHover(props.offer);
   }}>
     {isPremium
       ? <div className="place-card__mark">
