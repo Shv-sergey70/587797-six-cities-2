@@ -5,6 +5,7 @@ import {maxRatingValue} from "../../mocks/offers";
 export const Card = (props) => {
   const {offer, onTitleClick, onCardHover} = props;
   const {
+    id,
     title,
     previewImage,
     isPremium,
@@ -15,7 +16,7 @@ export const Card = (props) => {
   } = offer;
 
   return <article className="cities__place-card place-card" onMouseOver={() => {
-    onCardHover(props.offer);
+    onCardHover(offer);
   }}>
     {isPremium
       ? <div className="place-card__mark">
@@ -47,7 +48,7 @@ export const Card = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onTitleClick}>{title}</a>
+        <a href={`offer/${id}`} onClick={onTitleClick}>{title}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -55,6 +56,7 @@ export const Card = (props) => {
 };
 
 export const offerPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
   title: PropTypes.oneOf([
     `Beautiful & luxurious apartment at great location`,
     `Wood and stone place`,

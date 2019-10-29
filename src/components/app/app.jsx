@@ -5,23 +5,20 @@ import {offerPropTypes} from "../card/card";
 import {OfferDetail} from "../offer-detail/offer-detail";
 
 const getPageScreen = (props) => {
-  console.log(location.pathname);
-  console.log(/^offer\/\d$/.test(location.pathname));
-  // switch(location.pathname) {
-  //   case `/`:
-      return <MainPage offers = {props.firstPageProp} />;
-  //   case `/offer/:id`:
-  //     return <OfferDetail offer={props.secondPageProp} />;
-  // }
+  switch (true) {
+    case /^\/offer\/\d$/.test(location.pathname):
+      const offerId = location.pathname.match(/^\/offer\/(\d)$/)[1];
+      console.log(props);
+      return <OfferDetail offer={props} />;
+    default:
+      return <MainPage offers = {props} />;
+  }
 };
 
 export const App = (props) => {
   const {offers} = props;
 
-  return <React.Fragment>{getPageScreen(props)}</React.Fragment>;
-  // return <MainPage
-  //   offers = {offers}
-  // />;
+  return getPageScreen(offers);
 };
 
 App.propTypes = {

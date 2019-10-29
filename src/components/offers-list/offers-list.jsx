@@ -27,9 +27,7 @@ export class OffersList extends React.PureComponent {
   }
 
   _onCardHover(activeCardData) {
-    this.setState(() => {
-      return {activeCard: activeCardData};
-    });
+    this.setState(() => ({activeCard: activeCardData}));
   }
 }
 
