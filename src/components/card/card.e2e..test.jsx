@@ -6,6 +6,7 @@ import {Card} from "./card";
 Enzyme.configure({adapter: new Adapter()});
 
 const offerData = {
+  id: 1,
   title: `Beautiful & luxurious apartment at great location`,
   previewImage: `/img/apartment-01.jpg`,
   isPremium: true,

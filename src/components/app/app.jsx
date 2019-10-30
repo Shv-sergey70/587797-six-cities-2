@@ -4,14 +4,19 @@ import PropTypes from 'prop-types';
 import {offerPropTypes} from "../card/card";
 import {OfferDetail} from "../offer-detail/offer-detail";
 
-const getPageScreen = (props) => {
+const getPageScreen = (offers) => {
   switch (true) {
     case /^\/offer\/\d$/.test(location.pathname):
-      const offerId = location.pathname.match(/^\/offer\/(\d)$/)[1];
-      console.log(props);
-      return <OfferDetail offer={props} />;
+      const offerId = Number(location.pathname.match(/^\/offer\/(\d)$/)[1]);
+      const selectedOffer = offers.find((offer) => offer.id === offerId);
+
+      if (selectedOffer !== undefined) {
+        return <OfferDetail offer={selectedOffer} />;
+      }
+
+      return <MainPage offers = {offers} />;
     default:
-      return <MainPage offers = {props} />;
+      return <MainPage offers = {offers} />;
   }
 };
 

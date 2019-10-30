@@ -4,6 +4,7 @@ import {MainPage} from "./main-page";
 
 const offers = [
   {
+    id: 1,
     title: `Beautiful & luxurious apartment at great location`,
     previewImage: `/img/apartment-01.jpg`,
     isPremium: true,
@@ -13,6 +14,7 @@ const offers = [
     rating: 4.5
   },
   {
+    id: 2,
     title: `Wood and stone place`,
     previewImage: `/img/apartment-01.jpg`,
     isPremium: true,
@@ -22,6 +24,7 @@ const offers = [
     rating: 4
   },
   {
+    id: 3,
     title: `Canal View Prinsengracht`,
     previewImage: `/img/apartment-02.jpg`,
     isPremium: false,
@@ -31,6 +34,7 @@ const offers = [
     rating: 5
   },
   {
+    id: 4,
     title: `Nice, cozy, warm big bed apartment`,
     previewImage: `/img/apartment-03.jpg`,
     isPremium: false,

@@ -7,6 +7,7 @@ it(`Card correctly renders`, () => {
       <Card
         offer = {
           {
+            id: 1,
             title: `Beautiful & luxurious apartment at great location`,
             previewImage: `/img/apartment-01.jpg`,
             isPremium: true,
