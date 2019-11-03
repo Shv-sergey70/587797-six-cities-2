@@ -18,7 +18,11 @@ export const offersData = [
       name: `Angelina`,
       avatar: `/img/avatar-angelina.jpg`
     },
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 2,
@@ -38,7 +42,11 @@ export const offersData = [
       name: `Angelina`,
       avatar: `/img/avatar-angelina.jpg`
     },
-    description: `The building is green and from 18th century.`
+    description: `The building is green and from 18th century.`,
+    location: {
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 3,
@@ -58,7 +66,11 @@ export const offersData = [
       name: `Angelina`,
       avatar: `/img/avatar-angelina.jpg`
     },
-    description: `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`
+    description: `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198
+    }
   },
   {
     id: 4,
@@ -78,6 +90,10 @@ export const offersData = [
       name: `Angelina`,
       avatar: `/img/avatar-angelina.jpg`
     },
-    description: `An independent House`
+    description: `An independent House`,
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198
+    }
   }
 ];

@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {offerPropTypes} from "../card/card";
 import {OffersList} from "../offers-list/offers-list";
+import {Map} from "../map/map";
 
 export const MainPage = (props) => {
   const {offers} = props;
+
+  const offersLocations = offers.map((offer) => offer.location);
+  console.log(offersLocations);
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -93,7 +97,11 @@ export const MainPage = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"> </section>
+            <section className="cities__map map">
+              <Map
+                offersLocations = {offersLocations}
+              />
+            </section>
           </div>
         </div>
       </div>
