@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import {offerPropTypes} from "../card/card";
 import {OffersList} from "../offers-list/offers-list";
 import {CitiesList} from "../cities-list/cities-list";
-import {City} from "../city/city";
+import {Map} from "../map/map";
 
 export const MainPage = (props) => {
   const {
     offers,
     currentCity
   } = props;
+
+  const offersLocations = offers.map((offer) => offer.location);
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -70,7 +72,11 @@ export const MainPage = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"> </section>
+            <section className="cities__map map">
+              <Map
+                offersLocations = {offersLocations}
+              />
+            </section>
           </div>
         </div>
       </div>
