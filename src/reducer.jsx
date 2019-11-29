@@ -1,9 +1,11 @@
 import {cities} from "./mocks/cities";
 import {offersData} from "./mocks/offers";
 
+export const getOffersByCity = (selectedCityName, offers) => offers.filter((offer) => offer.city.name === selectedCityName);
+
 const initialState = {
   currentCity: cities[0],
-  offersList: offersData.filter((offerData) => offerData.city === cities[0].name)
+  currentOffers: getOffersByCity(cities[0].name, offersData)
 };
 
 export const ActionCreator = {
@@ -20,7 +22,7 @@ export const reducer = (state = initialState, action) => {
 
       return Object.assign({}, state, {
         currentCity: newCity,
-        offersList: offersData.filter((offerData) => offerData.city === newCity.name)
+        currentOffers: getOffersByCity(newCity.name, offersData)
       });
     }
   }

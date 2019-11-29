@@ -10,13 +10,18 @@ export class CitiesList extends React.PureComponent {
   }
 
   render() {
-    const {cities, currentCity} = this.props;
+    const {
+      cities,
+      currentCity,
+      onCityClick
+    } = this.props;
 
     return <ul className="locations__list tabs__list">
       {cities.map((city, i) => <City
         key = {`city-${i}`}
         cityName = {city.name}
         isActive = {city.name === currentCity.name}
+        onCityClick = {onCityClick}
       />)}
     </ul>;
   }
@@ -26,7 +31,14 @@ export class CitiesList extends React.PureComponent {
   }
 }
 
+const cityPropTypes = PropTypes.exact({
+  name: PropTypes.oneOf([`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`])
+});
+
 CitiesList.propTypes = {
-  cities: PropTypes.array, // @ todo fix it
-  currentCity: PropTypes.object
+  cities: PropTypes.arrayOf(cityPropTypes),
+  currentCity: PropTypes.object,
+  onCityClick: PropTypes.func.isRequired
 };
+
+export {cityPropTypes};

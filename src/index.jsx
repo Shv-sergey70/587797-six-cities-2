@@ -12,7 +12,7 @@ const init = () => {
   ReactDom.render(
       <Provider store={store}>
         <App
-          offers = {offersData}
+          allOffers = {offersData}
         />
       </Provider>,
       document.querySelector(`#root`)

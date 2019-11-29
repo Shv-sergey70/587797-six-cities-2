@@ -101,5 +101,30 @@ export const offersData = [
       latitude: 52.3809553943508,
       longitude: 4.939309666406198
     }
+  },
+  {
+    id: 5,
+    city: cities[0],
+    title: `Nice, cozy, warm big bed apartment`,
+    previewImage: `/img/apartment-02.jpg`,
+    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
+    bedrooms: 2,
+    maxAdults: 2,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    isPremium: true,
+    isFavorite: true,
+    type: `Apartment`,
+    price: 180,
+    rating: 5,
+    host: {
+      isPro: true,
+      name: `Angelina`,
+      avatar: `/img/avatar-angelina.jpg`
+    },
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.919309666406198
+    }
   }
 ];
