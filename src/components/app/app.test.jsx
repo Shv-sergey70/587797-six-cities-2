@@ -2,9 +2,22 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {App} from './app';
 
+export const cities = [
+  {
+    name: `Paris`
+  },
+  {
+    name: `Brussels`
+  },
+  {
+    name: `Amsterdam`
+  },
+];
+
 const offers = [
   {
     id: 1,
+    city: cities[0],
     title: `Beautiful & luxurious apartment at great location`,
     previewImage: `/img/apartment-01.jpg`,
     isPremium: true,
@@ -15,6 +28,7 @@ const offers = [
   },
   {
     id: 2,
+    city: cities[1],
     title: `Wood and stone place`,
     previewImage: `/img/apartment-01.jpg`,
     isPremium: true,
@@ -25,6 +39,7 @@ const offers = [
   },
   {
     id: 3,
+    city: cities[0],
     title: `Canal View Prinsengracht`,
     previewImage: `/img/apartment-02.jpg`,
     isPremium: false,
@@ -35,6 +50,7 @@ const offers = [
   },
   {
     id: 4,
+    city: cities[2],
     title: `Nice, cozy, warm big bed apartment`,
     previewImage: `/img/apartment-03.jpg`,
     isPremium: false,
@@ -48,7 +64,14 @@ const offers = [
 it(`App correctly renders`, () => {
   const tree = renderer.create(
       <App
-        offers = {offers}
+        currentCity = {
+          {
+            name: `Paris`
+          }
+        }
+        onCityClick = {() => {}}
+        allOffers = {offers}
+        currentOffers = {offers.filter((offer) => offer.city.name === `Paris`)}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();
