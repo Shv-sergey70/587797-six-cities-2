@@ -1,6 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from "enzyme-adapter-react-16/build";
+import toJson from 'enzyme-to-json';
+
 import {App} from './app';
+
+Enzyme.configure({adapter: new Adapter()});
 
 export const cities = [
   {
@@ -62,7 +67,7 @@ const offers = [
 ];
 
 it(`App correctly renders`, () => {
-  const tree = renderer.create(
+  const tree = shallow(
       <App
         currentCity = {
           {
@@ -72,7 +77,7 @@ it(`App correctly renders`, () => {
         onCityClick = {() => {}}
         allOffers = {offers}
         currentOffers = {offers.filter((offer) => offer.city.name === `Paris`)}
-      />).toJSON();
+      />);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

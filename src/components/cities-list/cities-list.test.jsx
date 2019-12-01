@@ -22,6 +22,8 @@ it(`Cities list correctly renders`, () => {
           name: `Paris`
         }}
         onCityClick = {() => {}}
+        activeItem={`Paris`}
+        changeActiveItem={jest.fn()}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();

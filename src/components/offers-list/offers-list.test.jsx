@@ -39,6 +39,8 @@ it(`OfferList correctly renders`, () => {
   const tree = renderer.create(
       <OffersList
         offers = {offersData}
+        activeItem={0}
+        changeActiveItem={jest.fn()}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();
