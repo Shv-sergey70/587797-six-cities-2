@@ -1,6 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import {MainPage} from "./main-page";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16/build";
+import toJson from 'enzyme-to-json';
+
+Enzyme.configure({adapter: new Adapter()});
 
 export const cities = [
   {
@@ -24,7 +28,11 @@ const offers = [
     isFavorite: true,
     type: `Apartment`,
     price: 80,
-    rating: 4.5
+    rating: 4.5,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 2,
@@ -35,7 +43,11 @@ const offers = [
     isFavorite: false,
     type: `Private room`,
     price: 180,
-    rating: 4
+    rating: 4,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 3,
@@ -46,7 +58,11 @@ const offers = [
     isFavorite: true,
     type: `Apartment`,
     price: 120,
-    rating: 5
+    rating: 5,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: 4,
@@ -57,12 +73,16 @@ const offers = [
     isFavorite: false,
     type: `Private room`,
     price: 40,
-    rating: 3
+    rating: 3,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   }
 ];
 
 it(`Main-page correctly renders`, () => {
-  const tree = renderer.create(
+  const tree = shallow(
       <MainPage
         allOffers = {offers}
         currentCity = {
@@ -72,7 +92,7 @@ it(`Main-page correctly renders`, () => {
         }
         currentOffers = {offers.filter((offer) => offer.city.name === `Paris`)}
         onCityClick = {() => {}}
-      />).toJSON();
+      />);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

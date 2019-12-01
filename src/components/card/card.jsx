@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {maxRatingValue} from "../../mocks/offers";
 
 export const Card = (props) => {
-  const {offer, onTitleClick, onCardHover} = props;
+  const {offer, onTitleClick, onCardClick} = props;
   const {
     id,
     title,
@@ -15,8 +15,8 @@ export const Card = (props) => {
     rating
   } = offer;
 
-  return <article className="cities__place-card place-card" onMouseOver={() => {
-    onCardHover(offer);
+  return <article className="cities__place-card place-card" onClick={() => {
+    onCardClick(offer.id);
   }}>
     {isPremium
       ? <div className="place-card__mark">
@@ -74,5 +74,5 @@ export const offerPropTypes = PropTypes.shape({
 Card.propTypes = {
   offer: offerPropTypes,
   onTitleClick: PropTypes.func,
-  onCardHover: PropTypes.func
+  onCardClick: PropTypes.func
 };

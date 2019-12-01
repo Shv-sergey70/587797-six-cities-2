@@ -17,19 +17,20 @@ const offerData = {
 };
 
 it(`Card title success click and hover`, () => {
-  const clickHandler = jest.fn();
-  const hoverHandler = jest.fn();
+  const titleClickHandler = jest.fn();
+  const cardClickHandler = jest.fn();
 
   const cardScreen = shallow(
       <Card
         offer = {offerData}
-        onTitleClick = {clickHandler}
-        onCardHover = {hoverHandler}
+        onTitleClick = {titleClickHandler}
+        onCardClick = {cardClickHandler}
       />);
 
   cardScreen.find(`.place-card__name a`).simulate(`click`);
-  cardScreen.find(`.cities__place-card`).simulate(`mouseover`);
+  cardScreen.find(`.cities__place-card`).simulate(`click`);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
-  expect(hoverHandler).toHaveBeenCalledWith(offerData);
+  expect(titleClickHandler).toHaveBeenCalledTimes(1);
+  expect(cardClickHandler).toHaveBeenCalledTimes(1);
+  expect(cardClickHandler).toHaveBeenCalledWith(offerData.id);
 });
