@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {applyMiddleware, createStore} from 'redux';
-import {reducer} from "./reducer";
+import {Operation, reducer} from "./reducer";
 import {Provider} from 'react-redux';
 import {App} from "./components/app/app";
-import {offersData} from "./mocks/offers";
 import configureAPI from "./api";
 import {compose} from "recompose";
 import thunk from "redux-thunk";
@@ -17,11 +16,11 @@ const init = () => {
       window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
   ));
 
+  store.dispatch(Operation.loadOffers());
+
   ReactDom.render(
       <Provider store={store}>
-        <App
-          allOffers = {offersData}
-        />
+        <App/>
       </Provider>,
       document.querySelector(`#root`)
   );

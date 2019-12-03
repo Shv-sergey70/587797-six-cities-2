@@ -22,7 +22,7 @@ export class CitiesList extends React.PureComponent {
       {cities.map((city, i) => <City
         key = {`city-${i}`}
         cityName = {city.name}
-        isActive = {city.name === activeItem}
+        isActive = {city.name === activeItem.name}
         onCityClick = {this._handleCityChange}
       />)}
     </ul>;
@@ -34,32 +34,44 @@ export class CitiesList extends React.PureComponent {
 
   _handleCityChange(evt) {
     const {
+      cities,
       onCityClick,
       changeActiveItem
     } = this.props;
 
     const cityName = evt.target.innerText;
+    const newCity = cities.find((city) => city.name === cityName);
 
-    onCityClick(cityName);
-    changeActiveItem(cityName);
+    onCityClick(newCity);
+    changeActiveItem(newCity);
   }
 }
 
+export const offerLocationPropTypes = PropTypes.exact({
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number.isRequired
+});
+
 const cityPropTypes = PropTypes.exact({
-  name: PropTypes.oneOf([`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`])
+  name: PropTypes.oneOf([`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`]),
+  location: offerLocationPropTypes
 });
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(cityPropTypes),
   onCityClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.oneOf([`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`]).isRequired,
+  activeItem: cityPropTypes,
   changeActiveItem: PropTypes.func.isRequired
 };
 
 export {cityPropTypes};
 
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  cities: state.cities
+});
 const mapDispatchToProps = (dispatch) => ({
-  onCityClick: (cityName) => dispatch(ActionCreator.changeCity(cityName))
+  onCityClick: (city) => dispatch(ActionCreator.changeCity(city))
 });
 
-export default connect(null, mapDispatchToProps)(CitiesList);
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
