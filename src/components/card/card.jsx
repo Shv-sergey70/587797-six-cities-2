@@ -57,16 +57,11 @@ export const Card = (props) => {
 
 export const offerPropTypes = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  title: PropTypes.oneOf([
-    `Beautiful & luxurious apartment at great location`,
-    `Wood and stone place`,
-    `Canal View Prinsengracht`,
-    `Nice, cozy, warm big bed apartment`
-  ]).isRequired,
+  title: PropTypes.string.isRequired,
   previewImage: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  type: PropTypes.oneOf([`Apartment`, `Private room`]),
+  type: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired
 });

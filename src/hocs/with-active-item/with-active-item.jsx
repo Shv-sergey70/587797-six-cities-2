@@ -15,6 +15,14 @@ const withActiveItem = (Component) => {
       this._changeActiveItem = this._changeActiveItem.bind(this);
     }
 
+    componentDidUpdate() {
+      const {defaultActiveItem} = this.props;
+
+      this.setState({
+        activeItem: defaultActiveItem
+      });
+    }
+
     render() {
       const {activeItem} = this.state;
 
@@ -33,7 +41,7 @@ const withActiveItem = (Component) => {
   }
 
   WithActiveItem.propTypes = {
-    defaultActiveItem: PropTypes.any.isRequired
+    defaultActiveItem: PropTypes.any
   };
 
   return WithActiveItem;

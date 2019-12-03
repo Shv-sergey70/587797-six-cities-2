@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import leaflet from 'leaflet';
+import {offerLocationPropTypes} from "../cities-list/cities-list";
 
 export class Map extends React.PureComponent {
   constructor(props) {
@@ -67,8 +68,5 @@ export class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  offersLocations: PropTypes.arrayOf(PropTypes.exact({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired
-  })).isRequired
+  offersLocations: PropTypes.arrayOf(offerLocationPropTypes).isRequired
 };

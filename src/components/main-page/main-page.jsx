@@ -13,11 +13,10 @@ const OffersListWrapped = withActiveItem(OffersList);
 const MainPage = (props) => {
   const {
     allOffers,
-    currentCity,
-    currentOffers,
+    currentCity
   } = props;
 
-  const uniqueCities = Array.from(new Set(allOffers.map((offer) => offer.city)));
+  const currentOffers = getOffersByCity(currentCity, allOffers);
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -48,9 +47,7 @@ const MainPage = (props) => {
       <div className="tabs">
         <section className="locations container">
           <CitiesListWrapped
-            cities = {uniqueCities}
-            currentCity = {currentCity}
-            defaultActiveItem={currentCity.name}
+            defaultActiveItem={currentCity}
           />
         </section>
       </div>
@@ -94,14 +91,14 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   allOffers: PropTypes.arrayOf(offerPropTypes),
-  currentOffers: PropTypes.arrayOf(offerPropTypes),
   currentCity: cityPropTypes,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   currentCity: state.currentCity,
-  currentOffers: state.currentOffers
+  allOffers: state.offers
 });
+export const getOffersByCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity.name);
 
 export {MainPage};
 
