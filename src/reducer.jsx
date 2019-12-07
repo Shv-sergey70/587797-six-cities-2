@@ -4,8 +4,9 @@ import {getUniqueCities} from "./utils";
 
 const initialState = {
   cities: [],
-  currentCity: {},
   offers: [],
+
+  currentCity: {},
   authData: {}
 };
 

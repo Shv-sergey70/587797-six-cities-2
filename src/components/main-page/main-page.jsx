@@ -7,19 +7,17 @@ import {Map} from "../map/map";
 import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
-import {getOffersByCity} from "../../utils";
+import Selectors from '../../selector';
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
 
 const MainPage = (props) => {
   const {
-    allOffers,
+    currentOffers,
     currentCity,
     authData
   } = props;
-
-  const currentOffers = getOffersByCity(currentCity, allOffers);
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -99,14 +97,14 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  allOffers: PropTypes.arrayOf(offerPropTypes),
   currentCity: cityPropTypes,
+  currentOffers: PropTypes.arrayOf(offerPropTypes),
   authData: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   currentCity: state.currentCity,
-  allOffers: state.offers,
+  currentOffers: Selectors.getCurrentOffers(state),
   authData: state.authData
 });
 
