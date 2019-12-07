@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Operation} from "../../reducer";
+import Operation from "../../operation";
 import {connect} from "react-redux";
 import history from "../../history";
 import {Redirect} from 'react-router-dom';
