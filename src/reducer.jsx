@@ -1,5 +1,6 @@
 import OfferModel from "./entities/offer-model";
 import ActionType from './const/action';
+import {getUniqueCities} from "./utils";
 
 const initialState = {
   cities: [],
@@ -19,21 +20,7 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         offers: action.payload.map((offer) => new OfferModel(offer)),
         currentCity: action.payload[0].city,
-        cities: action.payload.reduce((acc, offer) => {
-          const city = offer.city;
-
-          if (acc.map[city.name] !== undefined) {
-            return acc;
-          }
-
-          acc.map[city.name] = true;
-          acc.cities.push(city);
-
-          return acc;
-        }, {
-          map: {},
-          cities: []
-        }).cities
+        cities: getUniqueCities(action.payload)
       });
     case ActionType.AUTHORIZE:
       return Object.assign({}, state, {

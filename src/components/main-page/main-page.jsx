@@ -7,6 +7,7 @@ import {Map} from "../map/map";
 import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
+import {getOffersByCity} from "../../utils";
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);

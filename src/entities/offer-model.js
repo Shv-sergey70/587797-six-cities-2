@@ -5,6 +5,7 @@ export default class OfferModel {
     this.title = data.title;
     this.isFavorite = data.is_favorite;
     this.isPremium = data.is_premium;
+    this.images = data.images;
     this.rating = data.rating;
     this.type = data.type;
     this.bedrooms = data.bedrooms;
@@ -16,4 +17,4 @@ export default class OfferModel {
     this.location = data.location;
     this.id = data.id;
   }
-};
+}
