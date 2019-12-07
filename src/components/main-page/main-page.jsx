@@ -18,8 +18,6 @@ const MainPage = (props) => {
     authData
   } = props;
 
-  console.log(`authData`, authData);
-
   const currentOffers = getOffersByCity(currentCity, allOffers);
 
   return <div className="page page--gray page--main">
@@ -110,7 +108,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   allOffers: state.offers,
   authData: state.authData
 });
-export const getOffersByCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity.name);
 
 export {MainPage};
 

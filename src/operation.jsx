@@ -1,4 +1,4 @@
-import {ActionCreator} from "./reducer";
+import ActionCreator from "./action-creator";
 
 export default {
   loadOffers: () => (dispatch, _getState, api) => {

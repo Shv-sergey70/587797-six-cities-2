@@ -1,26 +1,11 @@
-import {reducer, ActionCreator, getOffersByCity} from "./reducer";
+import {reducer} from "./reducer";
 
-export const cities = [
+const cities = [
   {
     name: `Paris`
   },
   {
     name: `Brussels`
-  }
-];
-
-const offersData = [
-  {
-    id: 1,
-    city: cities[0]
-  },
-  {
-    id: 2,
-    city: cities[1]
-  },
-  {
-    id: 3,
-    city: cities[0]
   }
 ];
 
@@ -79,32 +64,6 @@ const defaultInitialState = {
     }
   ]
 };
-
-describe(`getOffersByCity correctly works`, () => {
-  it(`filters with data`, () => {
-    expect(getOffersByCity(`Paris`, offersData)).toEqual([
-      {
-        id: 1,
-        city: cities[0]
-      },
-      {
-        id: 3,
-        city: cities[0]
-      }]);
-  });
-  it(`filters no data`, () => {
-    expect(getOffersByCity(`Paris`, [])).toEqual([]);
-  });
-});
-
-describe(`ActionCreate works correctly`, () => {
-  it(`changeCity method returns correct answer`, () => {
-    expect(ActionCreator.changeCity(`Amsterdam`)).toEqual({
-      type: `CHANGE_CITY`,
-      payload: `Amsterdam`
-    });
-  });
-});
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer with non-existing action should return initial state`, () => {

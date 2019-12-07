@@ -1,4 +1,5 @@
 import OfferModel from "./entities/offer-model";
+import ActionType from './const/action';
 
 const initialState = {
   cities: [],
@@ -6,42 +7,6 @@ const initialState = {
   offers: [],
   authData: {}
 };
-
-const ActionType = {
-  CHANGE_CITY: `CHANGE_CITY`,
-  LOAD_OFFERS: `LOAD_OFFERS`,
-  AUTHORIZE: `AUTHORIZE`
-};
-
-export const ActionCreator = {
-  changeCity: (chosenCity) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: chosenCity
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers
-  }),
-  authorize: (isAuth) => ({
-    type: ActionType.AUTHORIZE,
-    payload: isAuth
-  })
-};
-
-// export const Operation = {
-//   loadOffers: () => (dispatch, _getState, api) => {
-//     return api.get(`/hotels`)
-//       .then((response) => {
-//         dispatch(ActionCreator.loadOffers(response.data));
-//       });
-//   },
-//   authorize: (email, password) => (dispatch, _getState, api) => {
-//     return api.post(`/login`, {email, password})
-//       .then((response) => {
-//         dispatch(ActionCreator.authorize(response.data));
-//       });
-//   }
-// };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
