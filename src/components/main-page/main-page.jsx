@@ -6,6 +6,7 @@ import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
 import {Map} from "../map/map";
 import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
 import {connect} from "react-redux";
+import {Link} from 'react-router-dom';
 
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
@@ -13,8 +14,11 @@ const OffersListWrapped = withActiveItem(OffersList);
 const MainPage = (props) => {
   const {
     allOffers,
-    currentCity
+    currentCity,
+    authData
   } = props;
+
+  console.log(`authData`, authData);
 
   const currentOffers = getOffersByCity(currentCity, allOffers);
 
@@ -30,11 +34,17 @@ const MainPage = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </a>
+                {authData.email === undefined
+                  ? (<Link to='/login' className={`header__nav-link header__nav-link--profile`}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    </div>
+                    <span className="header__login">Sign in</span>
+                  </Link>)
+                  : (<Link to='/favorite' className={`header__nav-link header__nav-link--profile`}>
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    </div>
+                    <span className="header__user-name user__name">{authData.email}</span>
+                  </Link>)}
               </li>
             </ul>
           </nav>
@@ -92,11 +102,13 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   allOffers: PropTypes.arrayOf(offerPropTypes),
   currentCity: cityPropTypes,
+  authData: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   currentCity: state.currentCity,
-  allOffers: state.offers
+  allOffers: state.offers,
+  authData: state.authData
 });
 export const getOffersByCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity.name);
 

@@ -7,6 +7,7 @@ import {App} from "./components/app/app";
 import configureAPI from "./api";
 import {compose} from "recompose";
 import thunk from "redux-thunk";
+import {BrowserRouter} from 'react-router-dom';
 
 const init = () => {
   const api = configureAPI((...args) => store.dispatch(...args));
@@ -20,7 +21,9 @@ const init = () => {
 
   ReactDom.render(
       <Provider store={store}>
-        <App/>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)
   );

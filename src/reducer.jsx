@@ -3,12 +3,14 @@ import OfferModel from "./entities/offer-model";
 const initialState = {
   cities: [],
   currentCity: {},
-  offers: []
+  offers: [],
+  authData: {}
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  LOAD_OFFERS: `LOAD_OFFERS`
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  AUTHORIZE: `AUTHORIZE`
 };
 
 export const ActionCreator = {
@@ -19,6 +21,10 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers
+  }),
+  authorize: (isAuth) => ({
+    type: ActionType.AUTHORIZE,
+    payload: isAuth
   })
 };
 
@@ -27,6 +33,12 @@ export const Operation = {
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.loadOffers(response.data));
+      });
+  },
+  authorize: (email, password) => (dispatch, _getState, api) => {
+    return api.post(`/login`, {email, password})
+      .then((response) => {
+        dispatch(ActionCreator.authorize(response.data));
       });
   }
 };
@@ -57,6 +69,10 @@ export const reducer = (state = initialState, action) => {
           map: {},
           cities: []
         }).cities
+      });
+    case ActionType.AUTHORIZE:
+      return Object.assign({}, state, {
+        authData: action.payload
       });
   }
 
