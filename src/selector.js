@@ -2,7 +2,6 @@ import {createSelector} from 'reselect';
 import {getOffersByCity} from "./utils";
 
 const getOffersByCities = (offers) => {
-  console.log(`Recount`, offers);
   return offers.reduce((acc, offer) => {
     if (acc[offer.city.name]) {
       acc[offer.city.name].push(offer);

@@ -11,7 +11,8 @@ export class OffersList extends React.PureComponent {
 
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((offer, i) => <Card
-        key = {`card=${i}`}
+        {...offer}
+        key = {`card-${i}-${offer.isFavorite}`}
         offer = {offer}
         onTitleClick={() => {}}
         onCardClick = {changeActiveItem}

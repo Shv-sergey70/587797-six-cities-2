@@ -1,6 +1,6 @@
 import OfferModel from "./entities/offer-model";
 import ActionType from './const/action';
-import {getUniqueCities} from "./utils";
+import {getOffersByCity, getUniqueCities} from "./utils";
 
 const initialState = {
   cities: [],
@@ -18,10 +18,12 @@ export const reducer = (state = initialState, action) => {
       });
     }
     case ActionType.LOAD_OFFERS:
+      const offers = action.payload.map((offer) => new OfferModel(offer));
       return Object.assign({}, state, {
-        offers: action.payload.map((offer) => new OfferModel(offer)),
+        offers,
         currentCity: action.payload[0].city,
-        cities: getUniqueCities(action.payload)
+        cities: getUniqueCities(action.payload),
+        currentOffers: getOffersByCity(action.payload[0].city, offers),
       });
     case ActionType.AUTHORIZE:
       return Object.assign({}, state, {
@@ -35,7 +37,7 @@ export const reducer = (state = initialState, action) => {
       const newOffer = new OfferModel(action.payload);
 
       let favoriteOffersCopy = state.favoriteOffers.slice();
-      const offersCopy = state.offers;
+      const offersCopy = state.offers.slice();
 
       if (newOffer.isFavorite) {
         favoriteOffersCopy.push(newOffer);

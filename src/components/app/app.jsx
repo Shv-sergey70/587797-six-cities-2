@@ -1,7 +1,6 @@
 import React from 'react';
 import MainPage from "../main-page/main-page";
 import PropTypes from 'prop-types';
-import {offerPropTypes} from "../card/card";
 import {OfferDetail} from "../offer-detail/offer-detail";
 import {Switch, Route} from 'react-router-dom';
 import SignIn from "../sign-in/sign-in";
@@ -15,18 +14,13 @@ const SignInWrapped = withAuthForm(SignIn);
 
 const App = (props) => {
   const {
-    allOffers,
     checkAuth
   } = props;
 
   checkAuth();
 
   return <Switch>
-    <Route path={AppRoute.MAIN} exact component={() => {
-      return <MainPage
-        allOffers = {allOffers}
-      />;
-    }}/>
+    <Route path={AppRoute.MAIN} exact component={MainPage}/>
     <Route path={AppRoute.LOGIN} exact component={SignInWrapped}/>
     <Route path={AppRoute.FAVORITES} exact component={FavoritesPage}/>
     <Route
@@ -46,8 +40,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  allOffers: PropTypes.arrayOf(offerPropTypes),
-  checkAuth: PropTypes.func
+  checkAuth: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => {

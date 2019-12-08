@@ -30,7 +30,7 @@ export default {
   toggleFavoriteHotel: (hotelId, isSetFavorite) => (dispatch, _getState, api) => {
     return api.post(`/favorite/${hotelId}/${Number(isSetFavorite)}`)
       .then((response) => {
-        console.log(response);
+        console.log(`Actual data`, response);
         dispatch(ActionCreator.toggleFavoriteHotel(response.data));
       });
   }
