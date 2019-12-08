@@ -6,23 +6,29 @@ import {OfferDetail} from "../offer-detail/offer-detail";
 import {Switch, Route} from 'react-router-dom';
 import SignIn from "../sign-in/sign-in";
 import {withAuthForm} from "../../hocs/with-auth-form/with-auth-form";
+import {connect} from "react-redux";
+import Operation from '../../operation';
+import {Route as AppRoute} from '../../const/routes';
+import FavoritesPage from "../favorites-page/favorites-page";
 
 const SignInWrapped = withAuthForm(SignIn);
 
 const App = (props) => {
   const {
     allOffers,
+    checkAuth
   } = props;
 
+  checkAuth();
+
   return <Switch>
-    <Route path="/" exact component={() => {
+    <Route path={AppRoute.MAIN} exact component={() => {
       return <MainPage
         allOffers = {allOffers}
       />;
     }}/>
-    <Route path="/login" exact component={() => {
-      return <SignInWrapped/>;
-    }}/>
+    <Route path={AppRoute.LOGIN} exact component={SignInWrapped}/>
+    <Route path={AppRoute.FAVORITES} exact component={FavoritesPage}/>
     <Route
       render={() => (
         <h1>404</h1>
@@ -41,6 +47,14 @@ const App = (props) => {
 
 App.propTypes = {
   allOffers: PropTypes.arrayOf(offerPropTypes),
+  checkAuth: PropTypes.func
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    checkAuth: () => dispatch(Operation.checkAuth()),
+  };
 };
 
 export {App};
+export default connect(null, mapDispatchToProps)(App);

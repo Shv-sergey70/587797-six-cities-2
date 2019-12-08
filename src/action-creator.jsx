@@ -12,5 +12,13 @@ export default {
   authorize: (authData) => ({
     type: ActionType.AUTHORIZE,
     payload: authData
+  }),
+  loadFavorites: (favorites) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: favorites
+  }),
+  toggleFavoriteHotel: (updatedOffer) => ({
+    type: ActionType.TOGGLE_FAVORITE_HOTEL,
+    payload: updatedOffer
   })
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card, offerPropTypes} from "../card/card";
+import Card, {offerPropTypes} from "../card/card";
 
 export class OffersList extends React.PureComponent {
   render() {

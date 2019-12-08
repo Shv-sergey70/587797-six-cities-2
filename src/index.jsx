@@ -4,7 +4,7 @@ import {applyMiddleware, createStore} from 'redux';
 import Operation from './operation';
 import {reducer} from "./reducer";
 import {Provider} from 'react-redux';
-import {App} from "./components/app/app";
+import App from "./components/app/app";
 import configureAPI from "./api";
 import {compose} from "recompose";
 import thunk from "redux-thunk";
@@ -19,6 +19,7 @@ const init = () => {
   ));
 
   store.dispatch(Operation.loadOffers());
+  store.dispatch(Operation.loadFavorites());
 
   ReactDom.render(
       <Provider store={store}>

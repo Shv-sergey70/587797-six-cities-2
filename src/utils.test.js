@@ -1,4 +1,4 @@
-import {getOffersByCity, getUniqueCities} from "./utils";
+import {getOffersByCity, getRatingPercent, getUniqueCities} from "./utils";
 
 const cities = [
   {
@@ -69,5 +69,15 @@ describe(`getOffersByCity correctly works`, () => {
 describe(`getUniqueCities correctly works`, () => {
   it(`filters with data`, () => {
     expect(getUniqueCities(offersData)).toEqual(cities);
+  });
+});
+
+describe(`getRatingPercent correctly works`, () => {
+  it(`normal work with int rating`, () => {
+    expect(getRatingPercent(3, 5)).toEqual(60);
+  });
+
+  it(`normal work with float rating`, () => {
+    expect(getRatingPercent(4.2, 5)).toEqual(84);
   });
 });

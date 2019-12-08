@@ -8,12 +8,12 @@ const configureAPI = () => {
   });
 
   const onSuccess = (response) => {
-    console.log(response);
+    // console.log(response);
 
     return response;
   };
   const onFail = (error) => {
-    console.log(error); // Потестить работу
+    // console.log(error); // Потестить работу
   };
 
   api.interceptors.response.use(onSuccess, onFail);

@@ -17,3 +17,5 @@ export const getUniqueCities = (data) => {
     cities: []
   }).cities;
 };
+
+export const getRatingPercent = (rating, maxRatingValue) => Math.round(rating * 100 / maxRatingValue);
