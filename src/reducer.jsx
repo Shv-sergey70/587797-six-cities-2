@@ -1,34 +1,13 @@
 import OfferModel from "./entities/offer-model";
+import ActionType from './const/action';
+import {getOffersByCity, getUniqueCities} from "./utils";
 
 const initialState = {
   cities: [],
+  offers: [],
+  favoriteOffers: [],
   currentCity: {},
-  offers: []
-};
-
-const ActionType = {
-  CHANGE_CITY: `CHANGE_CITY`,
-  LOAD_OFFERS: `LOAD_OFFERS`
-};
-
-export const ActionCreator = {
-  changeCity: (chosenCity) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: chosenCity
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers
-  })
-};
-
-export const Operation = {
-  loadOffers: () => (dispatch, _getState, api) => {
-    return api.get(`/hotels`)
-      .then((response) => {
-        dispatch(ActionCreator.loadOffers(response.data));
-      });
-  }
+  authData: {}
 };
 
 export const reducer = (state = initialState, action) => {
@@ -39,24 +18,38 @@ export const reducer = (state = initialState, action) => {
       });
     }
     case ActionType.LOAD_OFFERS:
+      const offers = action.payload.map((offer) => new OfferModel(offer));
       return Object.assign({}, state, {
-        offers: action.payload.map((offer) => new OfferModel(offer)),
+        offers,
         currentCity: action.payload[0].city,
-        cities: action.payload.reduce((acc, offer) => {
-          const city = offer.city;
+        cities: getUniqueCities(action.payload),
+        currentOffers: getOffersByCity(action.payload[0].city, offers),
+      });
+    case ActionType.AUTHORIZE:
+      return Object.assign({}, state, {
+        authData: action.payload
+      });
+    case ActionType.LOAD_FAVORITES:
+      return Object.assign({}, state, {
+        favoriteOffers: action.payload.map((offer) => new OfferModel(offer))
+      });
+    case ActionType.TOGGLE_FAVORITE_HOTEL:
+      const newOffer = new OfferModel(action.payload);
 
-          if (acc.map[city.name] !== undefined) {
-            return acc;
-          }
+      let favoriteOffersCopy = state.favoriteOffers.slice();
+      const offersCopy = state.offers.slice();
 
-          acc.map[city.name] = true;
-          acc.cities.push(city);
+      if (newOffer.isFavorite) {
+        favoriteOffersCopy.push(newOffer);
+      } else {
+        favoriteOffersCopy = favoriteOffersCopy.filter((offer) => offer.id !== newOffer.id);
+      }
 
-          return acc;
-        }, {
-          map: {},
-          cities: []
-        }).cities
+      offersCopy.find((offer) => offer.id === newOffer.id).isFavorite = newOffer.isFavorite;
+
+      return Object.assign({}, state, {
+        favoriteOffers: favoriteOffersCopy,
+        offers: offersCopy
       });
   }
 

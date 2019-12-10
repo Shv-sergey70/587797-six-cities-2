@@ -1,11 +1,28 @@
 import axios from 'axios';
+import {ApiUrl, Route} from "./const/routes";
+import history from "./history";
+import {isPrivateRoute} from "./utils";
 
 const configureAPI = () => {
-  return axios.create({
-    baseURL: `https://htmlacademy-react-2.appspot.com/six-cities`,
+  const api = axios.create({
+    baseURL: ApiUrl,
     timeout: 5000,
     withCredentials: true
   });
+
+  const onSuccess = (response) => response;
+
+  const onFail = (err) => {
+    if ((err.status === 401 || (err.response && err.response.status === 401)) && isPrivateRoute(err.config.method, err.config.url)) {
+      return history.push(Route.LOGIN);
+    }
+
+    return err;
+  };
+
+  api.interceptors.response.use(onSuccess, onFail);
+
+  return api;
 };
 
 export default configureAPI;
