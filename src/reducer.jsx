@@ -7,6 +7,7 @@ const initialState = {
   offers: [],
   favoriteOffers: [],
   currentCity: {},
+  activeOfferLocation: {},
   authData: {}
 };
 
@@ -50,6 +51,10 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         favoriteOffers: favoriteOffersCopy,
         offers: offersCopy
+      });
+    case ActionType.CHANGE_ACTIVE_OFFER:
+      return Object.assign({}, state, {
+        activeOfferLocation: action.payload
       });
   }
 

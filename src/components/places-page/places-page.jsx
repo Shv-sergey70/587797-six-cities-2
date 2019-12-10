@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Map} from "../map/map";
+import Map from "../map/map";
 import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
 import {offerPropTypes} from "../card/card";
 import Selectors from "../../selector";
@@ -54,6 +54,7 @@ const PlacesPage = (props) => {
         <div className="cities__right-section">
           <section className="cities__map map">
             <Map
+              currentCityLocation={currentCity.location}
               offersLocations={currentOffers.map((offer) => offer.location)}
             />
           </section>

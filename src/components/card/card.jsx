@@ -4,6 +4,7 @@ import {MAX_RATING_VALUE} from "../../const/common";
 import {connect} from "react-redux";
 import Operation from "../../operation";
 import {getRatingPercent} from "../../utils";
+import ActionCreator from "../../action-creator";
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -17,6 +18,7 @@ class Card extends React.PureComponent {
       offer,
       onTitleClick,
       onCardClick,
+      changeActiveOffer
     } = this.props;
 
     const {
@@ -32,6 +34,10 @@ class Card extends React.PureComponent {
 
     return <article className="cities__place-card place-card" onClick={() => {
       // onCardClick(id);
+    }} onMouseOver={() => {
+      changeActiveOffer(offer.location); // @todo make class method
+    }} onMouseLeave={() => {
+      changeActiveOffer(null); // @todo make class method
     }}>
       {isPremium
         ? <div className="place-card__mark">
@@ -102,11 +108,13 @@ Card.propTypes = {
   offer: offerPropTypes,
   onTitleClick: PropTypes.func,
   onCardClick: PropTypes.func,
-  toggleFavoriteHotel: PropTypes.func
+  toggleFavoriteHotel: PropTypes.func,
+  changeActiveOffer: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleFavoriteHotel: (offerId, isSetFavorite) => dispatch(Operation.toggleFavoriteHotel(offerId, isSetFavorite))
+  toggleFavoriteHotel: (offerId, isSetFavorite) => dispatch(Operation.toggleFavoriteHotel(offerId, isSetFavorite)),
+  changeActiveOffer: (location) => dispatch(ActionCreator.changeActiveOffer(location))
 });
 
 export {Card};

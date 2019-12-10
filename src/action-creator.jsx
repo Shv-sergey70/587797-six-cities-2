@@ -20,5 +20,9 @@ export default {
   toggleFavoriteHotel: (updatedOffer) => ({
     type: ActionType.TOGGLE_FAVORITE_HOTEL,
     payload: updatedOffer
+  }),
+  changeActiveOffer: (updatedLocation) => ({
+    type: ActionType.CHANGE_ACTIVE_OFFER,
+    payload: updatedLocation
   })
 };

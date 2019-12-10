@@ -35,3 +35,7 @@ export const isPrivateRoute = (method, url) => {
 
   return false;
 };
+
+export const areLocationsEquals = (location1, location2) => {
+  return location1.latitude === location2.latitude && location1.longitude === location2.longitude;
+};
