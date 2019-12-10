@@ -1,3 +1,5 @@
+import {ApiUrl, PrivateRoute} from "./const/routes";
+
 export const getOffersByCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity.name);
 
 export const getUniqueCities = (data) => {
@@ -19,3 +21,17 @@ export const getUniqueCities = (data) => {
 };
 
 export const getRatingPercent = (rating, maxRatingValue) => Math.round(rating * 100 / maxRatingValue);
+
+export const isPrivateRoute = (method, url) => {
+  if (method) {
+    const methodRoutes = PrivateRoute[method.toLowerCase()];
+
+    if (methodRoutes) {
+      return !!methodRoutes.find((route) => {
+        return url === (ApiUrl + route) || route.endsWith(route);
+      });
+    }
+  }
+
+  return false;
+};

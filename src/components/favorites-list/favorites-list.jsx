@@ -16,8 +16,8 @@ const FavoritesList = (props) => {
       <section className="favorites">
         <h1 className="favorites__title">Saved listing</h1>
         <ul className="favorites__list">
-          {Object.keys(offersByCities).map((cityName) => <FavoritesListItem
-            key={`${cityName}`}
+          {Object.keys(offersByCities).map((cityName, i) => <FavoritesListItem
+            key={`${cityName}-${i}`}
             cityName={cityName}
             offers={offersByCities[cityName]}
           />

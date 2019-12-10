@@ -12,32 +12,40 @@ import FavoritesPage from "../favorites-page/favorites-page";
 
 const SignInWrapped = withAuthForm(SignIn);
 
-const App = (props) => {
-  const {
-    checkAuth
-  } = props;
+class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  checkAuth();
+  componentDidMount() {
+    const {
+      checkAuth
+    } = this.props;
 
-  return <Switch>
-    <Route path={AppRoute.MAIN} exact component={MainPage}/>
-    <Route path={AppRoute.LOGIN} exact component={SignInWrapped}/>
-    <Route path={AppRoute.FAVORITES} exact component={FavoritesPage}/>
-    <Route
-      render={() => (
-        <h1>404</h1>
-      )}/>
-  </Switch>;
+    checkAuth();
+  }
 
-  // if (/^\/offer\/\d$/.test(location.pathname)) {
-  //   const offerId = Number(location.pathname.match(/^\/offer\/(\d)$/)[1]);
-  //   const selectedOffer = allOffers.find((offer) => offer.id === offerId);
-  //
-  //   if (selectedOffer !== undefined) {
-  //     return <OfferDetail offer={selectedOffer} />;
-  //   }
-  // }
-};
+  render() {
+    return <Switch>
+      <Route path={AppRoute.MAIN} exact component={MainPage}/>
+      <Route path={AppRoute.LOGIN} exact component={SignInWrapped}/>
+      <Route path={AppRoute.FAVORITES} exact component={FavoritesPage}/>
+      <Route
+        render={() => (
+          <h1>404</h1>
+        )}/>
+    </Switch>;
+
+    // if (/^\/offer\/\d$/.test(location.pathname)) {
+    //   const offerId = Number(location.pathname.match(/^\/offer\/(\d)$/)[1]);
+    //   const selectedOffer = allOffers.find((offer) => offer.id === offerId);
+    //
+    //   if (selectedOffer !== undefined) {
+    //     return <OfferDetail offer={selectedOffer} />;
+    //   }
+    // }
+  }
+}
 
 App.propTypes = {
   checkAuth: PropTypes.func.isRequired

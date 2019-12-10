@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {applyMiddleware, createStore} from 'redux';
-import Operation from './operation';
 import {reducer} from "./reducer";
 import {Provider} from 'react-redux';
 import App from "./components/app/app";
@@ -17,9 +16,6 @@ const init = () => {
       applyMiddleware(thunk.withExtraArgument(api)),
       window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
   ));
-
-  store.dispatch(Operation.loadOffers());
-  store.dispatch(Operation.loadFavorites());
 
   ReactDom.render(
       <Provider store={store}>
