@@ -1,13 +1,16 @@
 import OfferModel from "./entities/offer-model";
 import ActionType from './const/action';
 import {getOffersByCity, getUniqueCities} from "./utils";
+import CommentModel from "./entities/comment-model";
 
 const initialState = {
   cities: [],
   offers: [],
   favoriteOffers: [],
   currentCity: {},
-  activeOfferLocation: {},
+  currentOfferDetail: null,
+  currentComments: [],
+  activeOfferLocation: null,
   authData: {}
 };
 
@@ -55,6 +58,14 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ACTIVE_OFFER:
       return Object.assign({}, state, {
         activeOfferLocation: action.payload
+      });
+    case ActionType.SET_CURRENT_OFFER_DETAIL:
+      return Object.assign({}, state, {
+        currentOfferDetail: action.payload
+      });
+    case ActionType.LOAD_COMMENTS_FOR_OFFER:
+      return Object.assign({}, state, {
+        currentComments: action.payload.map((comment) => new CommentModel(comment))
       });
   }
 

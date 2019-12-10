@@ -24,5 +24,13 @@ export default {
   changeActiveOffer: (updatedLocation) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,
     payload: updatedLocation
+  }),
+  setCurrentOfferDetail: (currentOffer) => ({
+    type: ActionType.SET_CURRENT_OFFER_DETAIL,
+    payload: currentOffer
+  }),
+  loadCommentsForOffer: (comments) => ({
+    type: ActionType.LOAD_COMMENTS_FOR_OFFER,
+    payload: comments
   })
 };

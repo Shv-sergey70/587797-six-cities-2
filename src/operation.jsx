@@ -1,9 +1,7 @@
 import ActionCreator from "./action-creator";
 import {ApiRoute} from './const/routes';
 
-const handleLoginResponse = (dispatch) => (response) => {
-  dispatch(ActionCreator.authorize(response.data));
-};
+const handleLoginResponse = (dispatch) => (response) => dispatch(ActionCreator.authorize(response.data));
 
 export default {
   loadOffers: () => (dispatch, _getState, api) => {
@@ -18,12 +16,12 @@ export default {
   },
   checkAuth: () => (dispatch, _getState, api) => {
     return api.get(ApiRoute.LOGIN)
-      .then(handleLoginResponse(dispatch));
+      .then(handleLoginResponse(dispatch))
+      .catch(() => {});
   },
   loadFavorites: () => (dispatch, _getState, api) => {
     return api.get(ApiRoute.FAVORITE)
       .then((response) => {
-        console.log(response);
         dispatch(ActionCreator.loadFavorites(response.data));
       });
   },
@@ -32,6 +30,13 @@ export default {
       .then((response) => {
         console.log(`Actual data`, response);
         dispatch(ActionCreator.toggleFavoriteHotel(response.data));
+      });
+  },
+  loadCommentsForOffer: (hotelId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${hotelId}`)
+      .then((response) => {
+        console.log(`Actual data`, response);
+        dispatch(ActionCreator.loadCommentsForOffer(response.data));
       });
   }
 };

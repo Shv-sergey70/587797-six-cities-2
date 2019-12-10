@@ -1,7 +1,7 @@
 import React from 'react';
 import MainPage from "../main-page/main-page";
 import PropTypes from 'prop-types';
-import {OfferDetail} from "../offer-detail/offer-detail";
+import OfferDetail from "../offer-detail/offer-detail";
 import {Switch, Route} from 'react-router-dom';
 import SignIn from "../sign-in/sign-in";
 import {withAuthForm} from "../../hocs/with-auth-form/with-auth-form";
@@ -19,10 +19,12 @@ class App extends React.PureComponent {
 
   componentDidMount() {
     const {
-      checkAuth
+      checkAuth,
+      loadOffers
     } = this.props;
 
     checkAuth();
+    loadOffers();
   }
 
   render() {
@@ -30,6 +32,7 @@ class App extends React.PureComponent {
       <Route path={AppRoute.MAIN} exact component={MainPage}/>
       <Route path={AppRoute.LOGIN} exact component={SignInWrapped}/>
       <Route path={AppRoute.FAVORITES} exact component={FavoritesPage}/>
+      <Route path={AppRoute.OFFER} exact component={OfferDetail}/>
       <Route
         render={() => (
           <h1>404</h1>
@@ -48,14 +51,14 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  checkAuth: PropTypes.func.isRequired
+  checkAuth: PropTypes.func.isRequired,
+  loadOffers: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    checkAuth: () => dispatch(Operation.checkAuth()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  checkAuth: () => dispatch(Operation.checkAuth()),
+  loadOffers: () => dispatch(Operation.loadOffers())
+});
 
 export {App};
 export default connect(null, mapDispatchToProps)(App);

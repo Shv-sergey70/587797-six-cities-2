@@ -4,19 +4,10 @@ import {offerPropTypes} from "../card/card";
 import {connect} from "react-redux";
 import Selectors from '../../selector';
 import PageHeader from '../page-header/page-header';
-import Operation from "../../operation";
 import PlacesPage from "../places-page/places-page";
 import PlacesPageEmpty from "../places-page-empty/places-page-empty";
 
-class MainPage extends React.PureComponent {
-  componentDidMount() {
-    const {
-      loadOffers
-    } = this.props;
-
-    loadOffers();
-  }
-
+class MainPage extends React.PureComponent { // Можно переписать на функцию
   render() {
     const {
       currentOffers
@@ -31,18 +22,13 @@ class MainPage extends React.PureComponent {
 }
 
 MainPage.propTypes = {
-  currentOffers: PropTypes.arrayOf(offerPropTypes),
-  loadOffers: PropTypes.func.isRequired
+  currentOffers: PropTypes.arrayOf(offerPropTypes)
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   currentOffers: Selectors.getCurrentOffers(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadOffers: () => dispatch(Operation.loadOffers())
-});
-
 export {MainPage};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps)(MainPage);

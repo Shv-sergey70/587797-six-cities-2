@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Operation from "../../operation";
 import {getRatingPercent} from "../../utils";
 import ActionCreator from "../../action-creator";
+import {Link} from 'react-router-dom';
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -16,8 +17,6 @@ class Card extends React.PureComponent {
   render() {
     const {
       offer,
-      onTitleClick,
-      onCardClick,
       changeActiveOffer
     } = this.props;
 
@@ -45,9 +44,9 @@ class Card extends React.PureComponent {
         </div>
         : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -72,7 +71,7 @@ class Card extends React.PureComponent {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`offer/${id}`} onClick={onTitleClick}>{title}</a>
+          <Link to={`offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -86,8 +85,6 @@ class Card extends React.PureComponent {
     } = this.props;
 
     evt.preventDefault();
-
-    console.log(`Current is favorite`, offer.isFavorite);
 
     toggleFavoriteHotel(offer.id, !offer.isFavorite);
   }
