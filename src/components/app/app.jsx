@@ -32,15 +32,6 @@ class App extends React.PureComponent {
           <h1>404</h1>
         )}/>
     </Switch>;
-
-    // if (/^\/offer\/\d$/.test(location.pathname)) {
-    //   const offerId = Number(location.pathname.match(/^\/offer\/(\d)$/)[1]);
-    //   const selectedOffer = allOffers.find((offer) => offer.id === offerId);
-    //
-    //   if (selectedOffer !== undefined) {
-    //     return <OfferDetail offer={selectedOffer} />;
-    //   }
-    // }
   }
 }
 

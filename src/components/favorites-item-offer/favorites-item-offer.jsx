@@ -4,6 +4,7 @@ import {getRatingPercent} from "../../utils";
 import {MAX_RATING_VALUE, FavoritesStatus} from "../../const/common";
 import Operation from "../../operation";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 class FavoritesItemOffer extends React.PureComponent {
   constructor(props) {
@@ -28,9 +29,9 @@ class FavoritesItemOffer extends React.PureComponent {
 
     return <article className="favorites__card place-card" key={`favorite-item${id}`}>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -53,7 +54,7 @@ class FavoritesItemOffer extends React.PureComponent {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
