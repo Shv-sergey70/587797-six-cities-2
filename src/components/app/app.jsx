@@ -1,32 +1,15 @@
 import React from 'react';
 import MainPage from "../main-page/main-page";
-import PropTypes from 'prop-types';
 import OfferDetail from "../offer-detail/offer-detail";
 import {Switch, Route} from 'react-router-dom';
 import SignIn from "../sign-in/sign-in";
 import {withAuthForm} from "../../hocs/with-auth-form/with-auth-form";
-import {connect} from "react-redux";
-import Operation from '../../operation';
 import {Route as AppRoute} from '../../const/routes';
 import FavoritesPage from "../favorites-page/favorites-page";
 
 const SignInWrapped = withAuthForm(SignIn);
 
 class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const {
-      checkAuth,
-      loadOffers
-    } = this.props;
-
-    checkAuth();
-    loadOffers();
-  }
-
   render() {
     return <Switch>
       <Route path={AppRoute.MAIN} exact component={MainPage}/>
@@ -50,15 +33,4 @@ class App extends React.PureComponent {
   }
 }
 
-App.propTypes = {
-  checkAuth: PropTypes.func.isRequired,
-  loadOffers: PropTypes.func.isRequired
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  checkAuth: () => dispatch(Operation.checkAuth()),
-  loadOffers: () => dispatch(Operation.loadOffers())
-});
-
 export {App};
-export default connect(null, mapDispatchToProps)(App);

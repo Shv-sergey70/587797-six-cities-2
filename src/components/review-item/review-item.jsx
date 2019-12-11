@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {getRatingPercent} from "../../utils";
 import {MAX_RATING_VALUE} from "../../const/common";
 import moment from 'moment';
+import commentPropTypes from "../../prop-types/comment";
 
 export const ReviewItem = (props) => {
   const {
@@ -38,16 +39,5 @@ export const ReviewItem = (props) => {
 };
 
 ReviewItem.propTypes = {
-  comment: PropTypes.exact({ // @todo Вынести в общий файл
-    id: PropTypes.number.isRequired,
-    user: PropTypes.exact({ // @todo Вынести в общий файл
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired
-    }),
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  })
+  comment: commentPropTypes
 };

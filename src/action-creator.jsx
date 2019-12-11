@@ -25,9 +25,9 @@ export default {
     type: ActionType.CHANGE_ACTIVE_OFFER,
     payload: updatedLocation
   }),
-  setCurrentOfferDetail: (currentOffer) => ({
-    type: ActionType.SET_CURRENT_OFFER_DETAIL,
-    payload: currentOffer
+  setCurrentOfferIdDetail: (currentOfferId) => ({
+    type: ActionType.SET_CURRENT_OFFER_ID_DETAIL,
+    payload: currentOfferId
   }),
   loadCommentsForOffer: (comments) => ({
     type: ActionType.LOAD_COMMENTS_FOR_OFFER,

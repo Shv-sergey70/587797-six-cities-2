@@ -10,7 +10,8 @@ export const Route = {
 export const ApiRoute = {
   HOTELS: `/hotels`,
   LOGIN: `/login`,
-  FAVORITE: `/favorite`
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`
 };
 
 export const PrivateRoute = {

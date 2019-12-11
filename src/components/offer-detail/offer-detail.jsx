@@ -5,35 +5,25 @@ import {MAX_RATING_VALUE} from "../../const/common";
 import ActionCreator from "../../action-creator";
 import Operation from '../../operation';
 import {ReviewItem} from "../review-item/review-item";
+import offerPropTypes from '../../prop-types/offer';
 
 class OfferDetail extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const {
-      offers
-    } = props;
-
     this._currentOfferId = Number(props.match.params.offerId);
     this._currentOffer = null;
 
-    console.log(props, this._currentOfferId, offers);
+    this._loadDataForOffer = this._loadDataForOffer.bind(this);
+    this._getImagesForRender = this._getImagesForRender.bind(this);
+  }
+
+  componentDidMount() {
+    this._loadDataForOffer();
   }
 
   componentDidUpdate() {
-    const {
-      offers,
-      setCurrentOfferDetail,
-      currentOfferDetail,
-      loadCommentsForOffer
-    } = this.props;
-
-    this._currentOffer = currentOfferDetail;
-
-    if (!this._currentOffer) {
-      setCurrentOfferDetail(offers.find((offer) => offer.id === this._currentOfferId));
-      loadCommentsForOffer(this._currentOfferId);
-    }
+    // this._loadDataForOffer();
   }
 
   render() {
@@ -46,7 +36,7 @@ class OfferDetail extends React.PureComponent {
       return null;
     }
 
-    console.log(currentComments, currentOfferDetail);
+    console.log(currentOfferDetail);
 
     const {
       title,
@@ -66,7 +56,7 @@ class OfferDetail extends React.PureComponent {
     return <section className="property">
       <div className="property__gallery-container container">
         <div className="property__gallery">
-          {images.map((imageSrc, i) => <div key={`image-${i}`} className="property__image-wrapper">
+          {this._getImagesForRender().map((imageSrc, i) => <div key={`image-${i}`} className="property__image-wrapper">
             <img className="property__image" src={imageSrc} alt="Photo studio"/>
           </div>)}
         </div>
@@ -183,45 +173,39 @@ class OfferDetail extends React.PureComponent {
       <section className="property__map map"/>
     </section>;
   }
+
+  _loadDataForOffer() {
+    const {
+      loadOffersForDetailPage,
+      currentOfferDetail
+    } = this.props;
+
+    this._currentOffer = currentOfferDetail;
+
+    if (!this._currentOffer) {
+      loadOffersForDetailPage(this._currentOfferId);
+    }
+  }
+
+  _getImagesForRender() {
+    const {
+      images
+    } = this.props.currentOfferDetail;
+
+    return images.length <= 6 ? images : images.slice(0, 6);
+  }
 }
 
 OfferDetail.propTypes = {
-  offers: PropTypes.array,
+  offers: PropTypes.arrayOf(offerPropTypes),
   currentOfferDetail: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
       offerId: PropTypes.string.isRequired
     })
   }),
-  setCurrentOfferDetail: PropTypes.func.isRequired,
-  loadCommentsForOffer: PropTypes.func.isRequired,
+  loadOffersForDetailPage: PropTypes.func.isRequired,
   currentComments: PropTypes.array
-  // offer: PropTypes.shape({
-  //   id: PropTypes.number.isRequired,
-  //   title: PropTypes.oneOf([
-  //     `Beautiful & luxurious apartment at great location`,
-  //     `Wood and stone place`,
-  //     `Canal View Prinsengracht`,
-  //     `Nice, cozy, warm big bed apartment`
-  //   ]).isRequired,
-  //   bedrooms: PropTypes.number.isRequired,
-  //   maxAdults: PropTypes.number.isRequired,
-  //   images: PropTypes.array.isRequired,
-  //   goods: PropTypes.arrayOf(PropTypes.oneOf([
-  //     `Wi-Fi`, `Heating`, `Kitchen`, `Fridge`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`
-  //   ])).isRequired,
-  //   isPremium: PropTypes.bool.isRequired,
-  //   isFavorite: PropTypes.bool.isRequired,
-  //   type: PropTypes.oneOf([`Apartment`, `Private room`]),
-  //   price: PropTypes.number.isRequired,
-  //   rating: PropTypes.number.isRequired,
-  //   host: PropTypes.shape({
-  //     isPro: PropTypes.bool.isRequired,
-  //     name: PropTypes.string.isRequired,
-  //     avatar: PropTypes.string.isRequired
-  //   }),
-  //   description: PropTypes.string.isRequired
-  // })
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -231,8 +215,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentOfferDetail: (currentOffer) => dispatch(ActionCreator.setCurrentOfferDetail(currentOffer)),
-  loadCommentsForOffer: (offerId) => dispatch(Operation.loadCommentsForOffer(offerId))
+  loadOffersForDetailPage: (currentOffer) => dispatch(Operation.loadOffersForDetailPage(currentOffer))
 });
 
 export {OfferDetail};

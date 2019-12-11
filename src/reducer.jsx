@@ -59,9 +59,9 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         activeOfferLocation: action.payload
       });
-    case ActionType.SET_CURRENT_OFFER_DETAIL:
+    case ActionType.SET_CURRENT_OFFER_ID_DETAIL:
       return Object.assign({}, state, {
-        currentOfferDetail: action.payload
+        currentOfferDetail: state.offers.find((offer) => offer.id === action.payload)
       });
     case ActionType.LOAD_COMMENTS_FOR_OFFER:
       return Object.assign({}, state, {
