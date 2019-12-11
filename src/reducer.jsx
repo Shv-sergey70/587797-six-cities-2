@@ -56,10 +56,12 @@ export const reducer = (state = initialState, action) => {
         offers: offersCopy
       });
     case ActionType.CHANGE_ACTIVE_OFFER:
+      const activeOffer = state.offers.find((offer) => offer.id === action.payload);
+
       return Object.assign({}, state, {
-        activeOfferLocation: action.payload
+        activeOfferLocation: activeOffer ? activeOffer.location : null
       });
-    case ActionType.SET_CURRENT_OFFER_ID_DETAIL:
+    case ActionType.SET_CURRENT_OFFER_DETAIL:
       return Object.assign({}, state, {
         currentOfferDetail: state.offers.find((offer) => offer.id === action.payload)
       });

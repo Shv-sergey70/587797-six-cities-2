@@ -4,8 +4,8 @@ import {MAX_RATING_VALUE} from "../../const/common";
 import {connect} from "react-redux";
 import Operation from "../../operation";
 import {getRatingPercent} from "../../utils";
-import ActionCreator from "../../action-creator";
 import {Link} from 'react-router-dom';
+import offerPropTypes from '../../prop-types/offer';
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -32,12 +32,7 @@ class Card extends React.PureComponent {
     } = offer;
 
     return <article className="cities__place-card place-card" onClick={() => {
-      // onCardClick(id);
-    }} onMouseOver={() => {
-      changeActiveOffer(offer.location); // @todo make class method
-    }} onMouseLeave={() => {
-      changeActiveOffer(null); // @todo make class method
-    }}>
+    }} onMouseEnter={() => changeActiveOffer(id)} onMouseLeave={() => changeActiveOffer(null)}>
       {isPremium
         ? <div className="place-card__mark">
           <span>Premium</span>
@@ -90,28 +85,14 @@ class Card extends React.PureComponent {
   }
 }
 
-export const offerPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  previewImage: PropTypes.string.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired
-});
-
 Card.propTypes = {
   offer: offerPropTypes,
-  onTitleClick: PropTypes.func,
-  onCardClick: PropTypes.func,
   toggleFavoriteHotel: PropTypes.func,
   changeActiveOffer: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
   toggleFavoriteHotel: (offerId, isSetFavorite) => dispatch(Operation.toggleFavoriteHotel(offerId, isSetFavorite)),
-  changeActiveOffer: (location) => dispatch(ActionCreator.changeActiveOffer(location))
 });
 
 export {Card};

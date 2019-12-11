@@ -35,6 +35,7 @@ export default {
     .get(ApiRoute.HOTELS)
     .then(handleOffersResponse(dispatch))
     .then(() => dispatch(ActionCreator.setCurrentOfferIdDetail(offerId)))
+    .then(() => dispatch(ActionCreator.changeActiveOffer(offerId)))
     .then(() => api.get(`${ApiRoute.COMMENTS}/${offerId}`))
     .then((response) => dispatch(ActionCreator.loadCommentsForOffer(response.data))),
 };

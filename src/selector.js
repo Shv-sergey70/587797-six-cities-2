@@ -13,12 +13,24 @@ const getOffersByCities = (offers) => {
   }, {});
 };
 
+const getNearestOffers = (offers) => {
+  if (offers) {
+    return offers.length > 3 ? offers.slice(0, 3) : offers;
+  }
+
+  return [];
+};
+
+const currentOfferDetail = (state) => state.currentOfferDetail;
+const currentOffers = (state) => state.currentOffers;
 const currentCity = (state) => state.currentCity;
 const allOffers = (state) => state.offers;
 const favoriteOffers = (state) => state.favoriteOffers;
+const authData = (state) => state.authData;
 
 export default {
-  getCurrentCity: createSelector(currentCity, (city) => city),
+  getUserEmail: createSelector([authData], (data) => data ? data.email : null),
   getCurrentOffers: createSelector([currentCity, allOffers], (city, offers) => getOffersByCity(city, offers)),
-  getFavoriteOffersByCities: createSelector([favoriteOffers], getOffersByCities)
+  getFavoriteOffersByCities: createSelector([favoriteOffers], getOffersByCities),
+  getNearestOffers: createSelector([currentOffers, currentOfferDetail], getNearestOffers)
 };

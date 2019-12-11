@@ -27,9 +27,7 @@ export const isPrivateRoute = (method, url) => {
     const methodRoutes = PrivateRoute[method.toLowerCase()];
 
     if (methodRoutes) {
-      return !!methodRoutes.find((route) => {
-        return url === (ApiUrl + route) || route.endsWith(route);
-      });
+      return !!methodRoutes.find((route) => url === (ApiUrl + route) || url.startsWith(ApiUrl + route));
     }
   }
 

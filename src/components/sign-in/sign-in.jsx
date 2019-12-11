@@ -6,6 +6,7 @@ import history from "../../history";
 import {Redirect} from 'react-router-dom';
 import {Route} from "../../const/routes";
 import PageHeader from "../page-header/page-header";
+import Selectors from '../../selector';
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -86,7 +87,7 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  isAuth: state.authData.email !== undefined
+  isAuth: !!Selectors.getUserEmail(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

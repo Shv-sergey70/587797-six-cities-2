@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import leaflet from 'leaflet';
-import {offerLocationPropTypes} from "../cities-list/cities-list";
+import locationPropTypes from "../../prop-types/location";
 import {areLocationsEquals} from "../../utils";
 import {connect} from "react-redux";
 
@@ -32,7 +32,7 @@ class Map extends React.PureComponent {
       zoom
     } = this._currentCityLocation;
 
-    const cityCoordinates = [latitude, longitude]; // Amsterdam
+    const cityCoordinates = [latitude, longitude];
 
     setTimeout(() => { // For tests passing
       this._map = leaflet.map(`map`, {
@@ -51,6 +51,7 @@ class Map extends React.PureComponent {
         .addTo(this._map);
 
       this._renderPins();
+      this._renderHighlight();
     }, 100);
   }
 
@@ -59,24 +60,28 @@ class Map extends React.PureComponent {
       currentCityLocation
     } = this.props;
 
-    if (!areLocationsEquals(currentCityLocation, this._currentCityLocation)) {
-      this._map.flyTo([currentCityLocation.latitude, currentCityLocation.longitude], currentCityLocation.zoom, {
-        animate: false,
-      });
-      this._pins.forEach((marker) => marker.remove());
-      this._renderPins();
-      this._currentCityLocation = currentCityLocation;
-    }
+    if (this._map) {
+      if (!areLocationsEquals(currentCityLocation, this._currentCityLocation)) {
+        this._map.flyTo([currentCityLocation.latitude, currentCityLocation.longitude], currentCityLocation.zoom, {
+          animate: false,
+        });
+        this._pins.forEach((marker) => marker.remove());
+        this._renderPins();
+        this._currentCityLocation = currentCityLocation;
+      }
 
-    this._renderHighlight();
+      this._renderHighlight();
+    }
   }
 
   componentWillUnmount() {
-    this._map.remove();
+    if (this._map) {
+      this._map.remove();
+    }
   }
 
   render() {
-    return <div id="map" style={{height: `100%`}}> </div>;
+    return <div id="map" style={{height: `100%`}}/>;
   }
 
   _renderPins() {
@@ -113,13 +118,14 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  offersLocations: PropTypes.arrayOf(offerLocationPropTypes).isRequired,
-  currentCityLocation: PropTypes.object, // @todo fix it
-  activeOfferLocation: PropTypes.object // @todo fix it
+  offersLocations: PropTypes.arrayOf(locationPropTypes).isRequired,
+  currentCityLocation: locationPropTypes,
+  activeOfferLocation: locationPropTypes
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  activeOfferLocation: state.activeOfferLocation
+  activeOfferLocation: state.activeOfferLocation,
+  currentCityLocation: state.currentCity.location
 });
 
 export {Map};

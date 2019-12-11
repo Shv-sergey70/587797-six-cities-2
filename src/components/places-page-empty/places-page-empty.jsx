@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
 import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
-
-const CitiesListWrapped = withActiveItem(CitiesList);
 
 const PlacesPageEmpty = (props) => {
   const {
@@ -15,7 +12,7 @@ const PlacesPageEmpty = (props) => {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          <CitiesListWrapped
+          <CitiesList
             defaultActiveItem={currentCity}
           />
         </ul>

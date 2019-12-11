@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import Map from "../map/map";
 import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
-import {offerPropTypes} from "../card/card";
+import offerPropTypes from "../../prop-types/offer";
 import Selectors from "../../selector";
-import {withActiveItem} from "../../hocs/with-active-item/with-active-item";
-import {OffersList} from "../offers-list/offers-list";
-
-const CitiesListWrapped = withActiveItem(CitiesList);
-const OffersListWrapped = withActiveItem(OffersList);
+import OffersList from "../offers-list/offers-list";
 
 const PlacesPage = (props) => {
   const {
@@ -21,7 +17,7 @@ const PlacesPage = (props) => {
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
       <section className="locations container">
-        <CitiesListWrapped
+        <CitiesList
           defaultActiveItem={currentCity}
         />
       </section>
@@ -46,15 +42,13 @@ const PlacesPage = (props) => {
               <li className="places__option" tabIndex="0">Top rated first</li>
             </ul>
           </form>
-          <OffersListWrapped
+          <OffersList
             offers={currentOffers}
-            defaultActiveItem={0}
           />
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">
             <Map
-              currentCityLocation={currentCity.location}
               offersLocations={currentOffers.map((offer) => offer.location)}
             />
           </section>

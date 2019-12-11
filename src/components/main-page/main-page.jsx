@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {offerPropTypes} from "../card/card";
+import offerPropTypes from "../../prop-types/offer";
 import {connect} from "react-redux";
 import Selectors from '../../selector';
 import PageHeader from '../page-header/page-header';
@@ -8,15 +8,12 @@ import PlacesPage from "../places-page/places-page";
 import PlacesPageEmpty from "../places-page-empty/places-page-empty";
 import Operation from "../../operation";
 
-class MainPage extends React.PureComponent { // Можно переписать на функцию
-
+class MainPage extends React.PureComponent {
   componentDidMount() {
     const {
-      checkAuth,
       loadOffers
     } = this.props;
 
-    checkAuth();
     loadOffers();
   }
 
@@ -34,7 +31,8 @@ class MainPage extends React.PureComponent { // Можно переписать 
 }
 
 MainPage.propTypes = {
-  currentOffers: PropTypes.arrayOf(offerPropTypes)
+  currentOffers: PropTypes.arrayOf(offerPropTypes),
+  loadOffers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -42,7 +40,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  checkAuth: () => dispatch(Operation.checkAuth()),
   loadOffers: () => dispatch(Operation.loadOffers())
 });
 

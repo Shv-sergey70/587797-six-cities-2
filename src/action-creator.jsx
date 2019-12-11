@@ -21,12 +21,12 @@ export default {
     type: ActionType.TOGGLE_FAVORITE_HOTEL,
     payload: updatedOffer
   }),
-  changeActiveOffer: (updatedLocation) => ({
+  changeActiveOffer: (offerId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,
-    payload: updatedLocation
+    payload: offerId
   }),
   setCurrentOfferIdDetail: (currentOfferId) => ({
-    type: ActionType.SET_CURRENT_OFFER_ID_DETAIL,
+    type: ActionType.SET_CURRENT_OFFER_DETAIL,
     payload: currentOfferId
   }),
   loadCommentsForOffer: (comments) => ({
