@@ -2,6 +2,7 @@ import OfferModel from "./entities/offer-model";
 import ActionType from './const/action';
 import {getOffersByCity, getUniqueCities} from "./utils";
 import CommentModel from "./entities/comment-model";
+import {SortingType} from "./const/common";
 
 const initialState = {
   cities: [],
@@ -11,7 +12,8 @@ const initialState = {
   currentOfferDetail: null,
   currentComments: [],
   activeOfferLocation: null,
-  authData: {}
+  authData: {},
+  sortingType: SortingType.POPULAR
 };
 
 export const reducer = (state = initialState, action) => {
@@ -68,6 +70,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS_FOR_OFFER:
       return Object.assign({}, state, {
         currentComments: action.payload.map((comment) => new CommentModel(comment))
+      });
+    case ActionType.CHANGE_SORTING_TYPE:
+      return Object.assign({}, state, {
+        sortingType: action.payload
       });
   }
 

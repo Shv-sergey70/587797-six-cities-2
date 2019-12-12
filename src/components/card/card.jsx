@@ -31,15 +31,14 @@ class Card extends React.PureComponent {
       rating
     } = offer;
 
-    return <article className="cities__place-card place-card" onClick={() => {
-    }} onMouseEnter={() => changeActiveOffer(id)} onMouseLeave={() => changeActiveOffer(null)}>
+    return <article className="cities__place-card place-card" onMouseEnter={() => changeActiveOffer(id)} onMouseLeave={() => changeActiveOffer(null)}>
       {isPremium
         ? <div className="place-card__mark">
           <span>Premium</span>
         </div>
         : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`offer/${id}`}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
@@ -66,7 +65,7 @@ class Card extends React.PureComponent {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${id}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

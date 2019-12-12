@@ -32,5 +32,9 @@ export default {
   loadCommentsForOffer: (comments) => ({
     type: ActionType.LOAD_COMMENTS_FOR_OFFER,
     payload: comments
+  }),
+  changeSortingType: (newSortingType) => ({
+    type: ActionType.CHANGE_SORTING_TYPE,
+    payload: newSortingType
   })
 };

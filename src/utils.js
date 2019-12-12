@@ -1,6 +1,28 @@
 import {ApiUrl, PrivateRoute} from "./const/routes";
+import {SortingType} from "./const/common";
 
-export const getOffersByCity = (selectedCity, offers) => offers.filter((offer) => offer.city.name === selectedCity.name);
+export const getOffersByCity = (selectedCity, offers, sortingType) => {
+  const currentOffers = offers.filter((offer) => offer.city.name === selectedCity.name);
+
+  switch (sortingType) {
+    case SortingType.POPULAR:
+      break;
+    case SortingType.PRICE_HIGH_TO_LOW:
+      currentOffers.sort((a, b) => b.price - a.price);
+
+      break;
+    case SortingType.PRICE_LOW_TO_HIGH:
+      currentOffers.sort((a, b) => a.price - b.price);
+
+      break;
+    case SortingType.RATING_HIGH_TO_LOW:
+      currentOffers.sort((a, b) => b.rating - a.rating);
+
+      break;
+  }
+
+  return currentOffers;
+};
 
 export const getUniqueCities = (data) => {
   return data.reduce((acc, offer) => {

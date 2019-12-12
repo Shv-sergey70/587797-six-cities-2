@@ -26,12 +26,15 @@ class OfferDetail extends React.PureComponent {
     this._loadDataForOffer();
   }
 
+  componentDidUpdate() {
+    this._loadDataForOffer();
+  }
+
   render() {
     const {
       currentOfferDetail,
       currentComments,
-      nearestOffers,
-      toggleFavoriteHotel
+      nearestOffers
     } = this.props;
 
     if (currentOfferDetail === null) {
@@ -51,8 +54,6 @@ class OfferDetail extends React.PureComponent {
       host,
       description
     } = currentOfferDetail;
-
-    console.log(`Render`, isFavorite);
 
     return <div className="page">
       <PageHeader/>
@@ -118,7 +119,7 @@ class OfferDetail extends React.PureComponent {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{currentComments.length}</span></h2>
                 <ul className="reviews__list">
                   {currentComments.map((comment) => <ReviewItem
                     key={`comment-${comment.id}`}
@@ -200,12 +201,18 @@ class OfferDetail extends React.PureComponent {
   _loadDataForOffer() {
     const {
       loadOffersForDetailPage,
-      currentOfferDetail
+      currentOfferDetail,
+      match: {
+        params: {
+          offerId
+        }
+      }
     } = this.props;
 
+    this._currentOfferId = Number(offerId);
     this._currentOffer = currentOfferDetail;
 
-    if (!this._currentOffer) {
+    if (!this._currentOffer || this._currentOfferId !== currentOfferDetail.id) {
       loadOffersForDetailPage(this._currentOfferId);
     }
   }
