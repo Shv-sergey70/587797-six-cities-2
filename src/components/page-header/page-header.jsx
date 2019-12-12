@@ -46,7 +46,7 @@ PageHeader.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  userEmail: Selectors.getUserEmail(state) // Попробовать извлекаить селектором только почту
+  userEmail: Selectors.getUserEmail(state)
 });
 
 export {PageHeader};
