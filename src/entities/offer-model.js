@@ -1,3 +1,5 @@
+import UserModel from "./user-model";
+
 export default class OfferModel {
   constructor(data) {
     this.city = data.city;
@@ -12,7 +14,7 @@ export default class OfferModel {
     this.maxAdults = data.max_adults;
     this.price = data.price;
     this.goods = data.goods;
-    this.host = data.host;
+    this.host = new UserModel(data.host);
     this.description = data.description;
     this.location = data.location;
     this.id = data.id;

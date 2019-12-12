@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {offerPropTypes} from "../card/card";
+import offerPropTypes from "../../prop-types/offer";
 import {connect} from "react-redux";
 import Selectors from '../../selector';
 import PageHeader from '../page-header/page-header';
-import Operation from "../../operation";
 import PlacesPage from "../places-page/places-page";
 import PlacesPageEmpty from "../places-page-empty/places-page-empty";
+import Operation from "../../operation";
 
 class MainPage extends React.PureComponent {
   componentDidMount() {

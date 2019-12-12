@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, {offerPropTypes} from "../card/card";
+import Card from "../card/card";
+import offerPropTypes from '../../prop-types/offer';
+import ActionCreator from "../../action-creator";
+import {connect} from "react-redux";
 
-export class OffersList extends React.PureComponent {
+class OffersList extends React.PureComponent {
   render() {
     const {
       offers,
-      changeActiveItem
+      changeActiveOffer
     } = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, i) => <Card
-        {...offer}
-        key = {`card-${i}-${offer.isFavorite}`}
-        offer = {offer}
-        onTitleClick={() => {}}
-        onCardClick = {changeActiveItem}
+      {offers.map((offer) => <Card
+        key={`card-${offer.id}-${offer.isFavorite}`}
+        offer={offer}
+        changeActiveOffer={changeActiveOffer}
       />)}
     </div>;
   }
@@ -23,6 +24,14 @@ export class OffersList extends React.PureComponent {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes),
-  activeItem: PropTypes.number.isRequired,
-  changeActiveItem: PropTypes.func.isRequired
+  changeActiveOffer: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  changeActiveOffer: (offerId) => dispatch(ActionCreator.changeActiveOffer(offerId))
+});
+
+export {OffersList};
+
+export default connect(null, mapDispatchToProps)(OffersList);
+

@@ -1,26 +1,38 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import leaflet from 'leaflet';
-import {offerLocationPropTypes} from "../cities-list/cities-list";
+import locationPropTypes from "../../prop-types/location";
+import {areLocationsEquals} from "../../utils";
+import {connect} from "react-redux";
 
-export class Map extends React.PureComponent {
+class Map extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this._currentCityLocation = props.currentCityLocation;
     this._map = null;
     this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
+    this._highlightIcon = leaflet.icon({
+      iconUrl: `/img/pin-active.svg`,
+      iconSize: [30, 40]
+    });
     this._pins = [];
+    this._highlightMarker = null;
 
     this._renderPins = this._renderPins.bind(this);
   }
 
   componentDidMount() {
-    const cityCoordinates = [52.38333, 4.9]; // Amsterdam
+    const {
+      latitude,
+      longitude,
+      zoom
+    } = this._currentCityLocation;
 
-    const zoom = 12;
+    const cityCoordinates = [latitude, longitude];
 
     setTimeout(() => { // For tests passing
       this._map = leaflet.map(`map`, {
@@ -39,20 +51,37 @@ export class Map extends React.PureComponent {
         .addTo(this._map);
 
       this._renderPins();
+      this._renderHighlight();
     }, 100);
   }
 
   componentDidUpdate() {
-    this._pins.forEach((marker) => marker.remove());
-    this._renderPins();
+    const {
+      currentCityLocation
+    } = this.props;
+
+    if (this._map) {
+      if (!areLocationsEquals(currentCityLocation, this._currentCityLocation)) {
+        this._map.flyTo([currentCityLocation.latitude, currentCityLocation.longitude], currentCityLocation.zoom, {
+          animate: false,
+        });
+        this._pins.forEach((marker) => marker.remove());
+        this._renderPins();
+        this._currentCityLocation = currentCityLocation;
+      }
+
+      this._renderHighlight();
+    }
   }
 
   componentWillUnmount() {
-    this._map.remove();
+    if (this._map) {
+      this._map.remove();
+    }
   }
 
   render() {
-    return <div id="map" style={{height: `100%`}}> </div>;
+    return <div id="map" style={{height: `100%`}}/>;
   }
 
   _renderPins() {
@@ -65,8 +94,40 @@ export class Map extends React.PureComponent {
       marker.addTo(this._map);
     });
   }
+
+  _renderHighlight() {
+    const {
+      activeOfferLocation,
+    } = this.props;
+
+    if (this._highlightMarker) {
+      this._highlightMarker.remove();
+      this._highlightMarker = null;
+    }
+
+    if (activeOfferLocation) {
+      const {
+        latitude,
+        longitude
+      } = activeOfferLocation;
+
+      this._highlightMarker = leaflet.marker([latitude, longitude], {icon: this._highlightIcon});
+      this._highlightMarker.addTo(this._map);
+    }
+  }
 }
 
 Map.propTypes = {
-  offersLocations: PropTypes.arrayOf(offerLocationPropTypes).isRequired
+  offersLocations: PropTypes.arrayOf(locationPropTypes).isRequired,
+  currentCityLocation: locationPropTypes,
+  activeOfferLocation: locationPropTypes
 };
+
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  activeOfferLocation: state.activeOfferLocation,
+  currentCityLocation: state.currentCity.location
+});
+
+export {Map};
+
+export default connect(mapStateToProps)(Map);

@@ -14,10 +14,9 @@ const configureAPI = () => {
 
   const onFail = (err) => {
     if ((err.status === 401 || (err.response && err.response.status === 401)) && isPrivateRoute(err.config.method, err.config.url)) {
-      return history.push(Route.LOGIN);
+      console.log(401);
+      history.push(Route.LOGIN);
     }
-
-    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

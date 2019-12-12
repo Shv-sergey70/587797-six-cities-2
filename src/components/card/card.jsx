@@ -4,6 +4,8 @@ import {MAX_RATING_VALUE} from "../../const/common";
 import {connect} from "react-redux";
 import Operation from "../../operation";
 import {getRatingPercent} from "../../utils";
+import {Link} from 'react-router-dom';
+import offerPropTypes from '../../prop-types/offer';
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -15,8 +17,7 @@ class Card extends React.PureComponent {
   render() {
     const {
       offer,
-      onTitleClick,
-      onCardClick,
+      changeActiveOffer
     } = this.props;
 
     const {
@@ -30,18 +31,16 @@ class Card extends React.PureComponent {
       rating
     } = offer;
 
-    return <article className="cities__place-card place-card" onClick={() => {
-      // onCardClick(id);
-    }}>
+    return <article className="cities__place-card place-card" onMouseEnter={() => changeActiveOffer(id)} onMouseLeave={() => changeActiveOffer(null)}>
       {isPremium
         ? <div className="place-card__mark">
           <span>Premium</span>
         </div>
         : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -66,7 +65,7 @@ class Card extends React.PureComponent {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`offer/${id}`} onClick={onTitleClick}>{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -81,32 +80,18 @@ class Card extends React.PureComponent {
 
     evt.preventDefault();
 
-    console.log(`Current is favorite`, offer.isFavorite);
-
     toggleFavoriteHotel(offer.id, !offer.isFavorite);
   }
 }
 
-export const offerPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  previewImage: PropTypes.string.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired
-});
-
 Card.propTypes = {
   offer: offerPropTypes,
-  onTitleClick: PropTypes.func,
-  onCardClick: PropTypes.func,
-  toggleFavoriteHotel: PropTypes.func
+  toggleFavoriteHotel: PropTypes.func,
+  changeActiveOffer: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleFavoriteHotel: (offerId, isSetFavorite) => dispatch(Operation.toggleFavoriteHotel(offerId, isSetFavorite))
+  toggleFavoriteHotel: (offerId, isSetFavorite) => dispatch(Operation.toggleFavoriteHotel(offerId, isSetFavorite)),
 });
 
 export {Card};

@@ -17,8 +17,24 @@ export default {
     type: ActionType.LOAD_FAVORITES,
     payload: favorites
   }),
-  toggleFavoriteHotel: (updatedOffer) => ({
+  toggleFavoriteHotel: (hotelId, isSetFavorite) => ({
     type: ActionType.TOGGLE_FAVORITE_HOTEL,
-    payload: updatedOffer
+    payload: {hotelId, isSetFavorite}
+  }),
+  changeActiveOffer: (offerId) => ({
+    type: ActionType.CHANGE_ACTIVE_OFFER,
+    payload: offerId
+  }),
+  setCurrentOfferIdDetail: (currentOfferId) => ({
+    type: ActionType.SET_CURRENT_OFFER_DETAIL,
+    payload: currentOfferId
+  }),
+  loadCommentsForOffer: (comments) => ({
+    type: ActionType.LOAD_COMMENTS_FOR_OFFER,
+    payload: comments
+  }),
+  changeSortingType: (newSortingType) => ({
+    type: ActionType.CHANGE_SORTING_TYPE,
+    payload: newSortingType
   })
 };
