@@ -12,6 +12,7 @@ import PageHeader from "../page-header/page-header";
 import ReviewForm from "../review-form/review-form";
 import {withReviewForm} from "../../hocs/with-review-form/with-review-form";
 import moment from 'moment';
+import {getRatingPercent} from "../../utils";
 
 const ReviewFormWrapped = withReviewForm(ReviewForm);
 
@@ -91,7 +92,7 @@ class OfferDetail extends React.PureComponent {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${Math.round(rating * 100 / MAX_RATING_VALUE)}%`}}> </span>
+                  <span style={{width: `${getRatingPercent(rating, MAX_RATING_VALUE)}%`}}> </span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>

@@ -42,7 +42,7 @@ export const getUniqueCities = (data) => {
   }).cities;
 };
 
-export const getRatingPercent = (rating, maxRatingValue) => Math.round(rating * 100 / maxRatingValue);
+export const getRatingPercent = (rating, maxRatingValue) => Math.round(rating) * 100 / maxRatingValue;
 
 export const isPrivateRoute = (method, url) => {
   if (method) {
