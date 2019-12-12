@@ -17,9 +17,9 @@ export default {
     type: ActionType.LOAD_FAVORITES,
     payload: favorites
   }),
-  toggleFavoriteHotel: (updatedOffer) => ({
+  toggleFavoriteHotel: (hotelId, isSetFavorite) => ({
     type: ActionType.TOGGLE_FAVORITE_HOTEL,
-    payload: updatedOffer
+    payload: {hotelId, isSetFavorite}
   }),
   changeActiveOffer: (offerId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,

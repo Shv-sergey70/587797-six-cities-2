@@ -3,6 +3,7 @@ import {ApiRoute} from './const/routes';
 
 const handleLoginResponse = (dispatch) => (response) => dispatch(ActionCreator.authorize(response.data));
 const handleOffersResponse = (dispatch) => (response) => dispatch(ActionCreator.loadOffers(response.data));
+const handleCommentsResponse = (dispatch) => (response) => dispatch(ActionCreator.loadCommentsForOffer(response.data));
 
 export default {
   loadOffers: () => (dispatch, _getState, api) => {
@@ -26,10 +27,7 @@ export default {
   },
   toggleFavoriteHotel: (hotelId, isSetFavorite) => (dispatch, _getState, api) => {
     return api.post(`${ApiRoute.FAVORITE}/${hotelId}/${Number(isSetFavorite)}`)
-      .then((response) => {
-        console.log(`Actual data`, response);
-        dispatch(ActionCreator.toggleFavoriteHotel(response.data));
-      });
+      .then(() => dispatch(ActionCreator.toggleFavoriteHotel(hotelId, isSetFavorite)));
   },
   loadOffersForDetailPage: (offerId) => (dispatch, _, api) => {
     return api.get(ApiRoute.HOTELS)
@@ -37,15 +35,11 @@ export default {
       .then(() => dispatch(ActionCreator.setCurrentOfferIdDetail(offerId)))
       .then(() => dispatch(ActionCreator.changeActiveOffer(offerId)))
       .then(() => api.get(`${ApiRoute.COMMENTS}/${offerId}`))
-      .then((response) => dispatch(ActionCreator.loadCommentsForOffer(response.data)));
+      .then(handleCommentsResponse(dispatch));
   },
   addReview: (offerId, rating, comment) => (dispatch, _, api) => {
     return api.post(`${ApiRoute.COMMENTS}/${offerId}`, {rating, comment})
-      .then((response) => {
-        dispatch(ActionCreator.loadCommentsForOffer(response.data));
-        console.log(response);
-        return response;
-      })
+      .then(handleCommentsResponse(dispatch))
       .catch((err) => {
         throw new Error(err);
       });

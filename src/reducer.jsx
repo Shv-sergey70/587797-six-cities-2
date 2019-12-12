@@ -40,18 +40,22 @@ export const reducer = (state = initialState, action) => {
         favoriteOffers: action.payload.map((offer) => new OfferModel(offer))
       });
     case ActionType.TOGGLE_FAVORITE_HOTEL:
-      const newOffer = new OfferModel(action.payload);
+      const {
+        hotelId,
+        isSetFavorite
+      } = action.payload;
+
+      const offersCopy = state.offers.slice();
+      const offerForChange = offersCopy.find((offer) => offer.id === hotelId);
+      offerForChange.isFavorite = isSetFavorite;
 
       let favoriteOffersCopy = state.favoriteOffers.slice();
-      const offersCopy = state.offers.slice();
 
-      if (newOffer.isFavorite) {
-        favoriteOffersCopy.push(newOffer);
+      if (isSetFavorite) {
+        favoriteOffersCopy.push(offerForChange);
       } else {
-        favoriteOffersCopy = favoriteOffersCopy.filter((offer) => offer.id !== newOffer.id);
+        favoriteOffersCopy = favoriteOffersCopy.filter((offer) => offer.id !== hotelId);
       }
-
-      offersCopy.find((offer) => offer.id === newOffer.id).isFavorite = newOffer.isFavorite;
 
       return Object.assign({}, state, {
         favoriteOffers: favoriteOffersCopy,

@@ -41,7 +41,7 @@ const sortingType = (state) => state.sortingType;
 const currentComments = (state) => state.currentComments;
 
 export default {
-  isUserAuthorized: createSelector([authData], (data) => !!data),
+  isUserAuthorized: createSelector([authData], (data) => !data),
   getUserEmail: createSelector([authData], (data) => data ? data.email : null),
   getCurrentOffers: createSelector([currentCity, allOffers, sortingType], (city, offers, sort) => getOffersByCity(city, offers, sort)),
   getFavoriteOffersByCities: createSelector([favoriteOffers], getOffersByCities),
