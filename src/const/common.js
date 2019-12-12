@@ -1,4 +1,6 @@
 export const MAX_RATING_VALUE = 5;
+export const MAX_COMMENTS_FOR_PAGE = 10;
+export const MAX_NEAREST_PLACES = 3;
 
 export const FavoritesStatus = {
   SET: 1,

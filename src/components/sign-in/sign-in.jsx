@@ -87,7 +87,7 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  isAuth: !!Selectors.getUserEmail(state)
+  isAuth: Selectors.isUserAuthorized(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

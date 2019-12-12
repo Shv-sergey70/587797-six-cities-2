@@ -25,17 +25,29 @@ export default {
       });
   },
   toggleFavoriteHotel: (hotelId, isSetFavorite) => (dispatch, _getState, api) => {
-    return api.post(`/favorite/${hotelId}/${Number(isSetFavorite)}`)
+    return api.post(`${ApiRoute.FAVORITE}/${hotelId}/${Number(isSetFavorite)}`)
       .then((response) => {
         console.log(`Actual data`, response);
         dispatch(ActionCreator.toggleFavoriteHotel(response.data));
       });
   },
-  loadOffersForDetailPage: (offerId) => (dispatch, _, api) => api
-    .get(ApiRoute.HOTELS)
-    .then(handleOffersResponse(dispatch))
-    .then(() => dispatch(ActionCreator.setCurrentOfferIdDetail(offerId)))
-    .then(() => dispatch(ActionCreator.changeActiveOffer(offerId)))
-    .then(() => api.get(`${ApiRoute.COMMENTS}/${offerId}`))
-    .then((response) => dispatch(ActionCreator.loadCommentsForOffer(response.data))),
+  loadOffersForDetailPage: (offerId) => (dispatch, _, api) => {
+    return api.get(ApiRoute.HOTELS)
+      .then(handleOffersResponse(dispatch))
+      .then(() => dispatch(ActionCreator.setCurrentOfferIdDetail(offerId)))
+      .then(() => dispatch(ActionCreator.changeActiveOffer(offerId)))
+      .then(() => api.get(`${ApiRoute.COMMENTS}/${offerId}`))
+      .then((response) => dispatch(ActionCreator.loadCommentsForOffer(response.data)));
+  },
+  addReview: (offerId, rating, comment) => (dispatch, _, api) => {
+    return api.post(`${ApiRoute.COMMENTS}/${offerId}`, {rating, comment})
+      .then((response) => {
+        dispatch(ActionCreator.loadCommentsForOffer(response.data));
+        console.log(response);
+        return response;
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }
 };
