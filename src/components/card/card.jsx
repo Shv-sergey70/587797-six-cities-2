@@ -12,30 +12,28 @@ class Card extends React.PureComponent {
     super(props);
 
     this._handleToggleFavoriteButtonClick = this._handleToggleFavoriteButtonClick.bind(this);
+    this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
+    this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
   }
 
   render() {
     const {
-      offer,
-      changeActiveOffer
+      offer: {
+        id,
+        title,
+        previewImage,
+        isPremium,
+        isFavorite,
+        type,
+        price,
+        rating
+      }
     } = this.props;
 
-    const {
-      id,
-      title,
-      previewImage,
-      isPremium,
-      isFavorite,
-      type,
-      price,
-      rating
-    } = offer;
-
-    return <article className="cities__place-card place-card" onMouseEnter={() => changeActiveOffer(id)} onMouseLeave={() => changeActiveOffer(null)}>
+    return <article className="cities__place-card place-card"
+      onMouseEnter={this._handleCardMouseEnter} onMouseLeave={this._handleCardMouseLeave}>
       {isPremium
-        ? <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
+        ? <div className="place-card__mark"><span>Premium</span></div>
         : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
@@ -72,15 +70,32 @@ class Card extends React.PureComponent {
     </article>;
   }
 
-  _handleToggleFavoriteButtonClick(evt) {
+  _handleToggleFavoriteButtonClick() {
     const {
       offer,
       toggleFavoriteHotel
     } = this.props;
 
-    evt.preventDefault();
-
     toggleFavoriteHotel(offer.id, !offer.isFavorite);
+  }
+
+  _handleCardMouseEnter() {
+    const {
+      offer: {
+        id
+      },
+      changeActiveOffer
+    } = this.props;
+
+    changeActiveOffer(id);
+  }
+
+  _handleCardMouseLeave() {
+    const {
+      changeActiveOffer
+    } = this.props;
+
+    changeActiveOffer(null);
   }
 }
 

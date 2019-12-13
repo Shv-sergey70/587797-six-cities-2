@@ -3,7 +3,8 @@
 exports[`Card correctly renders 1`] = `
 <article
   className="cities__place-card place-card"
-  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="place-card__mark"
@@ -16,7 +17,8 @@ exports[`Card correctly renders 1`] = `
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer/1"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -50,6 +52,7 @@ exports[`Card correctly renders 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button place-card__bookmark-button--active"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -59,9 +62,7 @@ exports[`Card correctly renders 1`] = `
         >
           <use
             xlinkHref="#icon-bookmark"
-          >
-             
-          </use>
+          />
         </svg>
         <span
           className="visually-hidden"
@@ -79,7 +80,7 @@ exports[`Card correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "90%",
+              "width": "80%",
             }
           }
         >
@@ -96,7 +97,7 @@ exports[`Card correctly renders 1`] = `
       className="place-card__name"
     >
       <a
-        href="offer/1"
+        href="/offer/1"
         onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location
@@ -105,7 +106,7 @@ exports[`Card correctly renders 1`] = `
     <p
       className="place-card__type"
     >
-      Apartment
+      apartment
     </p>
   </div>
 </article>
