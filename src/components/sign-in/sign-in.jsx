@@ -13,7 +13,7 @@ class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._onSignInButtonClick = this._onSignInButtonClick.bind(this);
+    this._handleSignInButtonClick = this._handleSignInButtonClick.bind(this);
   }
 
   render() {
@@ -44,7 +44,7 @@ class SignIn extends React.PureComponent {
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" defaultValue={password} onChange={onInputKeydown}/>
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={this._onSignInButtonClick}>Sign in</button>
+              <button className="login__submit form__submit button" type="submit" onClick={this._handleSignInButtonClick}>Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">
@@ -59,7 +59,7 @@ class SignIn extends React.PureComponent {
     </div>;
   }
 
-  _onSignInButtonClick(evt) {
+  _handleSignInButtonClick(evt) {
     evt.preventDefault();
 
     const {

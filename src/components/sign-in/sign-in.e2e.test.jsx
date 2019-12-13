@@ -5,7 +5,11 @@ import {SignIn} from "./sign-in";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`SignIn email success keydown`, () => {
+jest.mock(`../../notifier`, () => ({
+  error: jest.fn()
+}));
+
+it(`SignIn email & password success keydown`, () => {
   const inputKeydownHandler = jest.fn();
 
   const signInScreen = shallow(
@@ -21,4 +25,69 @@ it(`SignIn email success keydown`, () => {
   signInScreen.find(`[name="password"]`).simulate(`change`);
 
   expect(inputKeydownHandler).toHaveBeenCalledTimes(2);
+});
+
+describe(`SignIn submit`, () => {
+  it(`SignIn email is empty`, () => {
+    const inputKeydownHandler = jest.fn();
+    const authorizeHandler = jest.fn();
+    const preventDefaultHandler = jest.fn();
+
+    const signInScreen = shallow(
+        <SignIn
+          email={``}
+          password={`my_password`}
+          onInputKeydown={inputKeydownHandler}
+          authorize={authorizeHandler}
+          isAuth={false}
+        />);
+
+    signInScreen.find(`button.button`).simulate(`click`, {
+      preventDefault: preventDefaultHandler
+    });
+
+    expect(authorizeHandler).toHaveBeenCalledTimes(0);
+  });
+
+  it(`SignIn password is empty`, () => {
+    const inputKeydownHandler = jest.fn();
+    const authorizeHandler = jest.fn();
+    const preventDefaultHandler = jest.fn();
+
+    const signInScreen = shallow(
+        <SignIn
+          email={`mymail@mail.com`}
+          password={``}
+          onInputKeydown={inputKeydownHandler}
+          authorize={authorizeHandler}
+          isAuth={false}
+        />);
+
+    signInScreen.find(`button.button`).simulate(`click`, {
+      preventDefault: preventDefaultHandler
+    });
+
+    expect(authorizeHandler).toHaveBeenCalledTimes(0);
+  });
+
+  it(`SignIn form success submit`, () => {
+    const inputKeydownHandler = jest.fn();
+    const authorizeHandler = jest.fn();
+    const preventDefaultHandler = jest.fn();
+
+    const signInScreen = shallow(
+        <SignIn
+          email={`mymail@mail.com`}
+          password={`my_password`}
+          onInputKeydown={inputKeydownHandler}
+          authorize={authorizeHandler}
+          isAuth={false}
+        />);
+
+    signInScreen.find(`button.button`).simulate(`click`, {
+      preventDefault: preventDefaultHandler
+    });
+
+    expect(authorizeHandler).toHaveBeenCalledTimes(1);
+  });
 });
