@@ -5,21 +5,27 @@ import {City} from "./city";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`City title success click`, () => {
-  const clickHandler = jest.fn();
+it(`Change city success`, () => {
+  const changeCityHandler = jest.fn();
+
+  const cityData = {
+    name: `Paris`,
+    location: {
+      latitude: 11,
+      longitude: 22,
+      zoom: 10
+    }
+  };
 
   const cityScreen = shallow(
       <City
-        cityName = {`Paris`}
-        isActive = {true}
-        onCityClick = {clickHandler}
+        city = {cityData}
+        currentCity = {{}}
+        changeCity = {changeCityHandler}
       />);
 
-  cityScreen.find(`a.locations__item-link`).simulate(`click`, {
-    target: {
-      text: `Пелагея`
-    }
-  });
+  cityScreen.find(`a.locations__item-link`).simulate(`click`);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(changeCityHandler).toHaveBeenCalledTimes(1);
+  expect(changeCityHandler).toHaveBeenNthCalledWith(1, cityData);
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
+import CitiesList from "../cities-list/cities-list";
+import cityPropTypes from '../../prop-types/city';
 
 const PlacesPageEmpty = (props) => {
   const {
