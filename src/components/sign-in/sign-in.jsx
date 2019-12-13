@@ -7,6 +7,7 @@ import {Redirect} from 'react-router-dom';
 import {Route} from "../../const/routes";
 import PageHeader from "../page-header/page-header";
 import Selectors from '../../selector';
+import notifier from "../../notifier";
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -67,14 +68,18 @@ class SignIn extends React.PureComponent {
       authorize
     } = this.props;
 
-    if (email.length === 0) {
-      throw new Error(`Email is empty`);
-    } else if (password.length === 0) {
-      throw new Error(`Password is empty`);
-    }
+    try {
+      if (email.length === 0) {
+        throw new Error(`Email is empty`);
+      } else if (password.length === 0) {
+        throw new Error(`Password is empty`);
+      }
 
-    authorize(email, password);
-    history.push(Route.MAIN);
+      authorize(email, password);
+      history.push(Route.MAIN);
+    } catch (e) {
+      notifier.error(e.message);
+    }
   }
 }
 
