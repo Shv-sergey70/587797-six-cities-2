@@ -5,7 +5,7 @@ import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import offerPropTypes from "../../prop-types/offer";
 import Selectors from "../../selector";
-import {OffersList} from "../offers-list/offers-list";
+import OffersList from "../offers-list/offers-list";
 import Sort from "../sort/sort";
 import {withOpen} from "../../hocs/with-open/with-open";
 import cityPropTypes from '../../prop-types/city';

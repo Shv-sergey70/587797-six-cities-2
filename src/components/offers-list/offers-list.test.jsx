@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {OffersList} from "./offers-list";
+import OffersList from "./offers-list";
 
 jest.mock(`../card/card.jsx`, () => `Card`);
 

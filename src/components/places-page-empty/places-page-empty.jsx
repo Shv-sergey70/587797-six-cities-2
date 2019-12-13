@@ -13,9 +13,7 @@ const PlacesPageEmpty = (props) => {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          <CitiesList
-            defaultActiveItem={currentCity}
-          />
+          <CitiesList/>
         </ul>
       </section>
     </div>

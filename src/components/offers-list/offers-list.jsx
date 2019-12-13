@@ -20,4 +20,4 @@ OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes)
 };
 
-export {OffersList};
+export default OffersList;
