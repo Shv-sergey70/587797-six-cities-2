@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavoritesList correctly renders 1`] = `
+<main
+  className="page__main page__main--favorites"
+>
+  <div
+    className="page__favorites-container container"
+  >
+    <section
+      className="favorites"
+    >
+      <h1
+        className="favorites__title"
+      >
+        Saved listing
+      </h1>
+      <ul
+        className="favorites__list"
+      >
+        <li
+          className="favorites__locations-items"
+        >
+          <div
+            className="favorites__locations locations locations--current"
+          >
+            <div
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link"
+                href="#"
+              >
+                <span>
+                  Amsterdam
+                </span>
+              </a>
+            </div>
+          </div>
+          <div
+            className="favorites__places"
+          >
+            <FavoritesItemOffer
+              offer={
+                Object {
+                  "bedrooms": 2,
+                  "description": "A quiet cozy and picturesque that hides behind a a river",
+                  "goods": Array [
+                    "Heating",
+                    "Kitchen",
+                    "Cable TV",
+                    "Washing machine",
+                    "Coffee machine",
+                    "Dishwasher",
+                  ],
+                  "id": 1,
+                  "images": Array [
+                    "/img/room.jpg",
+                    "/img/apartment-01.jpg",
+                    "/img/studio-01.jpg",
+                  ],
+                  "isFavorite": true,
+                  "isPremium": true,
+                  "maxAdults": 2,
+                  "previewImage": "/img/apartment-01.jpg",
+                  "price": 80,
+                  "rating": 4.4,
+                  "title": "Beautiful & luxurious apartment at great location",
+                  "type": "apartment",
+                }
+              }
+            />
+            <FavoritesItemOffer
+              offer={
+                Object {
+                  "bedrooms": 5,
+                  "description": "A quiet cozy and picturesque that hides behind a a river1",
+                  "goods": Array [
+                    "Heating",
+                    "Kitchen",
+                    "Cable TV",
+                    "Washing machine",
+                    "Coffee machine",
+                  ],
+                  "id": 2,
+                  "images": Array [
+                    "/img/room.jpg",
+                    "/img/apartment-01.jpg",
+                    "/img/studio-01.jpg",
+                  ],
+                  "isFavorite": true,
+                  "isPremium": false,
+                  "maxAdults": 3,
+                  "previewImage": "/img/apartment-01.jpg",
+                  "price": 180,
+                  "rating": 2.4,
+                  "title": "Beautiful & luxurious apartment at great location2",
+                  "type": "apartment",
+                }
+              }
+            />
+          </div>
+        </li>
+        <li
+          className="favorites__locations-items"
+        >
+          <div
+            className="favorites__locations locations locations--current"
+          >
+            <div
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link"
+                href="#"
+              >
+                <span>
+                  Brussels
+                </span>
+              </a>
+            </div>
+          </div>
+          <div
+            className="favorites__places"
+          >
+            <FavoritesItemOffer
+              offer={
+                Object {
+                  "bedrooms": 5,
+                  "description": "A quiet cozy and picturesque that hides behind a a river22",
+                  "goods": Array [
+                    "Heating",
+                    "Kitchen",
+                    "Cable TV",
+                    "Washing machine",
+                  ],
+                  "id": 3,
+                  "images": Array [
+                    "/img/room.jpg",
+                    "/img/apartment-01.jpg",
+                  ],
+                  "isFavorite": false,
+                  "isPremium": true,
+                  "maxAdults": 4,
+                  "previewImage": "/img/apartment-01.jpg",
+                  "price": 820,
+                  "rating": 4.9,
+                  "title": "Beautiful & luxurious apartment at great location33",
+                  "type": "room",
+                }
+              }
+            />
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</main>
+`;

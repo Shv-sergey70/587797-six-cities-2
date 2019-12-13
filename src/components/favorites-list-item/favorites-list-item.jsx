@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FavoritesItemOffer from "../favorites-item-offer/favorites-item-offer";
+import offersPropTypes from '../../prop-types/offer';
 
 const FavoritesListItem = (props) => {
   const {
@@ -28,7 +29,7 @@ const FavoritesListItem = (props) => {
 
 FavoritesListItem.propTypes = {
   cityName: PropTypes.string.isRequired,
-  offers: PropTypes.array.isRequired // fix it
+  offers: PropTypes.arrayOf(offersPropTypes)
 };
 
-export {FavoritesListItem};
+export default FavoritesListItem;

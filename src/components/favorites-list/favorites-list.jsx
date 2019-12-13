@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Selectors from "../../selector";
 import {connect} from "react-redux";
-import {FavoritesListItem} from "../favorites-list-item/favorites-list-item";
+import FavoritesListItem from "../favorites-list-item/favorites-list-item";
 
 const FavoritesList = (props) => {
   const {
     offersByCities
   } = props;
-
-  console.log(`offersByCities`, offersByCities);
 
   return <main className="page__main page__main--favorites">
     <div className="page__favorites-container container">

@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Favorites page behavior No favorites offers 1`] = `
+<div
+  className="page page--favorites-empty"
+>
+  <PageHeader />
+  <FavoritesEmpty />
+  <footer
+    className="footer container"
+  >
+    <a
+      className="footer__logo-link"
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        alt="6 cities logo"
+        className="footer__logo"
+        height="33"
+        src="img/logo.svg"
+        width="64"
+      />
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Favorites page behavior With favorites offers 1`] = `
+<div
+  className="page page--favorites-empty"
+>
+  <PageHeader />
+  <FavoritesList
+    favoriteOffers={
+      Array [
+        Object {
+          "bedrooms": 2,
+          "description": "A quiet cozy and picturesque that hides behind a a river",
+          "goods": Array [
+            "Heating",
+            "Kitchen",
+            "Cable TV",
+            "Washing machine",
+            "Coffee machine",
+            "Dishwasher",
+          ],
+          "id": 1,
+          "images": Array [
+            "/img/room.jpg",
+            "/img/apartment-01.jpg",
+            "/img/studio-01.jpg",
+          ],
+          "isFavorite": true,
+          "isPremium": true,
+          "maxAdults": 2,
+          "previewImage": "/img/apartment-01.jpg",
+          "price": 80,
+          "rating": 4.4,
+          "title": "Beautiful & luxurious apartment at great location",
+          "type": "apartment",
+        },
+        Object {
+          "bedrooms": 5,
+          "description": "A quiet cozy and picturesque that hides behind a a river1",
+          "goods": Array [
+            "Heating",
+            "Kitchen",
+            "Cable TV",
+            "Washing machine",
+            "Coffee machine",
+          ],
+          "id": 2,
+          "images": Array [
+            "/img/room.jpg",
+            "/img/apartment-01.jpg",
+            "/img/studio-01.jpg",
+          ],
+          "isFavorite": true,
+          "isPremium": false,
+          "maxAdults": 3,
+          "previewImage": "/img/apartment-01.jpg",
+          "price": 180,
+          "rating": 2.4,
+          "title": "Beautiful & luxurious apartment at great location2",
+          "type": "apartment",
+        },
+        Object {
+          "bedrooms": 5,
+          "description": "A quiet cozy and picturesque that hides behind a a river22",
+          "goods": Array [
+            "Heating",
+            "Kitchen",
+            "Cable TV",
+            "Washing machine",
+          ],
+          "id": 3,
+          "images": Array [
+            "/img/room.jpg",
+            "/img/apartment-01.jpg",
+          ],
+          "isFavorite": false,
+          "isPremium": true,
+          "maxAdults": 4,
+          "previewImage": "/img/apartment-01.jpg",
+          "price": 820,
+          "rating": 4.9,
+          "title": "Beautiful & luxurious apartment at great location33",
+          "type": "room",
+        },
+      ]
+    }
+  />
+  <footer
+    className="footer container"
+  >
+    <a
+      className="footer__logo-link"
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        alt="6 cities logo"
+        className="footer__logo"
+        height="33"
+        src="img/logo.svg"
+        width="64"
+      />
+    </a>
+  </footer>
+</div>
+`;

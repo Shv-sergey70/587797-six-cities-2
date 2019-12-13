@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const FavoritesEmpty = () => {
+const FavoritesEmpty = () => {
   return <main className="page__main page__main--favorites page__main--favorites-empty">
     <div className="page__favorites-container container">
       <section className="favorites favorites--empty">
@@ -14,3 +14,5 @@ export const FavoritesEmpty = () => {
     </div>
   </main>;
 };
+
+export default FavoritesEmpty;

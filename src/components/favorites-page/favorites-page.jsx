@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import PageHeader from '../page-header/page-header';
 import FavoritesList from "../favorites-list/favorites-list";
-import {FavoritesEmpty} from "../favorites-empty/favorites-empty";
+import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import {Link} from "react-router-dom";
 import Operation from "../../operation";
+import offerPropType from '../../prop-types/offer';
+import {Route} from "../../const/routes";
 
 class FavoritesPage extends React.PureComponent {
   constructor(props) {
@@ -22,6 +24,14 @@ class FavoritesPage extends React.PureComponent {
     loadFavorites();
   }
 
+  _isEmptyFavorites() {
+    const {
+      favoriteOffers
+    } = this.props;
+
+    return favoriteOffers.length === 0;
+  }
+
   render() {
     const {
       favoriteOffers
@@ -35,24 +45,16 @@ class FavoritesPage extends React.PureComponent {
       />}
 
       <footer className="footer container">
-        <Link to='/' className={`footer__logo-link`}>
+        <Link to={Route.MAIN} className={`footer__logo-link`}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
         </Link>
       </footer>
     </div>;
   }
-
-  _isEmptyFavorites() {
-    const {
-      favoriteOffers
-    } = this.props;
-
-    return favoriteOffers.length === 0;
-  }
 }
 
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.array,
+  favoriteOffers: PropTypes.arrayOf(offerPropType),
   loadFavorites: PropTypes.func.isRequired
 };
 
