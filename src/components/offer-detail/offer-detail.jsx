@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {MAX_RATING_VALUE} from "../../const/common";
 import Operation from '../../operation';
-import {ReviewItem} from "../review-item/review-item";
+import ReviewItem from "../review-item/review-item";
 import offerPropTypes from '../../prop-types/offer';
 import Card from "../card/card";
 import Selectors from '../../selector';
@@ -11,8 +11,8 @@ import Map from "../map/map";
 import PageHeader from "../page-header/page-header";
 import ReviewForm from "../review-form/review-form";
 import {withReviewForm} from "../../hocs/with-review-form/with-review-form";
-import moment from 'moment';
 import {getRatingPercent} from "../../utils";
+import commentPropTypes from '../../prop-types/comment';
 
 const ReviewFormWrapped = withReviewForm(ReviewForm);
 
@@ -34,6 +34,45 @@ class OfferDetail extends React.PureComponent {
 
   componentDidUpdate() {
     this._loadDataForOffer();
+  }
+
+  _loadDataForOffer() {
+    const {
+      loadOffersForDetailPage,
+      currentOfferDetail,
+      match: {
+        params: {
+          offerId
+        }
+      }
+    } = this.props;
+
+    this._currentOfferId = Number(offerId);
+    this._currentOffer = currentOfferDetail;
+
+    if (!this._currentOffer || this._currentOfferId !== currentOfferDetail.id) {
+      loadOffersForDetailPage(this._currentOfferId);
+    }
+  }
+
+  _getImagesForRender() {
+    const {
+      images
+    } = this.props.currentOfferDetail;
+
+    return images.length <= 6 ? images : images.slice(0, 6);
+  }
+
+  _handleToggleFavoriteButtonClick() {
+    const {
+      currentOfferDetail: {
+        id,
+        isFavorite
+      },
+      toggleFavoriteHotel
+    } = this.props;
+
+    toggleFavoriteHotel(id, !isFavorite);
   }
 
   render() {
@@ -158,51 +197,9 @@ class OfferDetail extends React.PureComponent {
       </main>
     </div>;
   }
-
-  _loadDataForOffer() {
-    const {
-      loadOffersForDetailPage,
-      currentOfferDetail,
-      match: {
-        params: {
-          offerId
-        }
-      }
-    } = this.props;
-
-    this._currentOfferId = Number(offerId);
-    this._currentOffer = currentOfferDetail;
-
-    if (!this._currentOffer || this._currentOfferId !== currentOfferDetail.id) {
-      loadOffersForDetailPage(this._currentOfferId);
-    }
-  }
-
-  _getImagesForRender() {
-    const {
-      images
-    } = this.props.currentOfferDetail;
-
-    return images.length <= 6 ? images : images.slice(0, 6);
-  }
-
-  _handleToggleFavoriteButtonClick(evt) {
-    const {
-      currentOfferDetail: {
-        id,
-        isFavorite
-      },
-      toggleFavoriteHotel
-    } = this.props;
-
-    evt.preventDefault();
-
-    toggleFavoriteHotel(id, !isFavorite);
-  }
 }
 
 OfferDetail.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes),
   currentOfferDetail: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -210,7 +207,7 @@ OfferDetail.propTypes = {
     })
   }),
   loadOffersForDetailPage: PropTypes.func.isRequired,
-  currentComments: PropTypes.array,
+  currentComments: PropTypes.arrayOf(commentPropTypes),
   nearestOffers: PropTypes.arrayOf(offerPropTypes),
   toggleFavoriteHotel: PropTypes.func.isRequired,
   isUserAuthorized: PropTypes.bool.isRequired
@@ -218,7 +215,6 @@ OfferDetail.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isUserAuthorized: Selectors.isUserAuthorized(state),
-  offers: state.offers,
   currentOfferDetail: state.currentOfferDetail,
   currentComments: Selectors.getSortedCurrentComments(state),
   nearestOffers: Selectors.getNearestOffers(state)

@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {getRatingPercent} from "../../utils";
 import {MAX_RATING_VALUE} from "../../const/common";
 import moment from 'moment';
 import commentPropTypes from "../../prop-types/comment";
 
-export const ReviewItem = (props) => {
+const ReviewItem = (props) => {
   const {
     comment: {
       user: {
@@ -41,3 +40,5 @@ export const ReviewItem = (props) => {
 ReviewItem.propTypes = {
   comment: commentPropTypes
 };
+
+export default ReviewItem;
