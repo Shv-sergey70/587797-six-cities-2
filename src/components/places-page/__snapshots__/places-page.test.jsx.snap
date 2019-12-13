@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Places page correctly renders 1`] = `
+<main
+  className="page__main page__main--index"
+>
+  <h1
+    className="visually-hidden"
+  >
+    Cities
+  </h1>
+  <div
+    className="tabs"
+  >
+    <section
+      className="locations container"
+    >
+      <CitiesList />
+    </section>
+  </div>
+  <div
+    className="cities"
+  >
+    <div
+      className="cities__places-container container"
+    >
+      <section
+        className="cities__places places"
+      >
+        <h2
+          className="visually-hidden"
+        >
+          Places
+        </h2>
+        <b
+          className="places__found"
+        >
+          2
+           places to stay in 
+          Paris
+        </b>
+        <Sort
+          isOpen={false}
+          onOpenStateChange={[Function]}
+        />
+        <OffersList
+          offers={
+            Array [
+              Object {
+                "bedrooms": 2,
+                "description": "A quiet cozy and picturesque that hides behind a a river",
+                "goods": Array [
+                  "Heating",
+                  "Kitchen",
+                  "Cable TV",
+                  "Washing machine",
+                  "Coffee machine",
+                  "Dishwasher",
+                ],
+                "id": 1,
+                "images": Array [
+                  "/img/room.jpg",
+                  "/img/apartment-01.jpg",
+                  "/img/studio-01.jpg",
+                ],
+                "isFavorite": true,
+                "isPremium": true,
+                "location": Object {
+                  "latitude": 123,
+                  "longitude": 456,
+                },
+                "maxAdults": 2,
+                "previewImage": "/img/apartment-01.jpg",
+                "price": 80,
+                "rating": 4.4,
+                "title": "Beautiful & luxurious apartment at great location",
+                "type": "apartment",
+              },
+              Object {
+                "bedrooms": 5,
+                "description": "A quiet cozy and picturesque that hides behind a a river1",
+                "goods": Array [
+                  "Heating",
+                  "Kitchen",
+                  "Cable TV",
+                  "Washing machine",
+                  "Coffee machine",
+                ],
+                "id": 2,
+                "images": Array [
+                  "/img/room.jpg",
+                  "/img/apartment-01.jpg",
+                  "/img/studio-01.jpg",
+                ],
+                "isFavorite": true,
+                "isPremium": false,
+                "location": Object {
+                  "latitude": 123,
+                  "longitude": 456,
+                },
+                "maxAdults": 3,
+                "previewImage": "/img/apartment-01.jpg",
+                "price": 180,
+                "rating": 2.4,
+                "title": "Beautiful & luxurious apartment at great location2",
+                "type": "apartment",
+              },
+            ]
+          }
+        />
+      </section>
+      <div
+        className="cities__right-section"
+      >
+        <section
+          className="cities__map map"
+        >
+          <Map
+            offersLocations={
+              Array [
+                Object {
+                  "latitude": 123,
+                  "longitude": 456,
+                },
+                Object {
+                  "latitude": 123,
+                  "longitude": 456,
+                },
+              ]
+            }
+          />
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+`;
