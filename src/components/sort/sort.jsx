@@ -35,29 +35,29 @@ class Sort extends React.PureComponent {
   _onMenuClick() {
     const {
       isOpen,
-      toggleOpenState
+      onOpenStateChange
     } = this.props;
 
-    toggleOpenState(!isOpen);
+    onOpenStateChange(!isOpen);
   }
 
   _getSortDescription(sortType) {
     const {
       activeSortingType,
       changeSortingType,
-      toggleOpenState
+      onOpenStateChange
     } = this.props;
 
     return <li key={sortType.name} className={`places__option ${activeSortingType.name === sortType.name ? `places__option--active` : ``}`} tabIndex="0" onClick={() => {
       changeSortingType(sortType);
-      toggleOpenState(false);
+      onOpenStateChange(false);
     }}>{sortType.text}</li>;
   }
 }
 
 Sort.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toggleOpenState: PropTypes.func.isRequired,
+  onOpenStateChange: PropTypes.func.isRequired,
   activeSortingType: PropTypes.exact({
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired

@@ -9,7 +9,7 @@ const withOpen = (Component) => {
         isOpen: false
       };
 
-      this.toggleOpenState = this.toggleOpenState.bind(this);
+      this._handleOpenStateChange = this._handleOpenStateChange.bind(this);
     }
 
     render() {
@@ -20,11 +20,11 @@ const withOpen = (Component) => {
       return <Component
         {...this.props}
         isOpen={isOpen}
-        toggleOpenState={this.toggleOpenState}
+        onOpenStateChange={this._handleOpenStateChange}
       />;
     }
 
-    toggleOpenState(isOpen) {
+    _handleOpenStateChange(isOpen) {
       this.setState({
         isOpen
       });

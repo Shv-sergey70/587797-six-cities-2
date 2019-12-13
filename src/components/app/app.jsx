@@ -1,7 +1,7 @@
 import React from 'react';
 import MainPage from "../main-page/main-page";
 import OfferDetail from "../offer-detail/offer-detail";
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 import SignIn from "../sign-in/sign-in";
 import {withAuthForm} from "../../hocs/with-auth-form/with-auth-form";
 import {Route as AppRoute} from '../../const/routes';
@@ -23,7 +23,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    return <BrowserRouter history={history}>
+    return <Router history={history}>
       <Switch>
         <Route path={AppRoute.MAIN} exact component={MainPage}/>
         <Route path={AppRoute.LOGIN} exact component={SignInWrapped}/>
@@ -34,7 +34,7 @@ class App extends React.PureComponent {
             <h1>404</h1>
           )}/>
       </Switch>
-    </BrowserRouter>;
+    </Router>;
   }
 }
 
