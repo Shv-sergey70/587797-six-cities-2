@@ -11,26 +11,58 @@ const offerData = {
   previewImage: `/img/apartment-01.jpg`,
   isPremium: true,
   isFavorite: true,
-  type: `Apartment`,
+  type: `apartment`,
   price: 80,
-  rating: 4.5
+  rating: 4.4,
+  bedrooms: 2,
+  maxAdults: 2,
+  images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
+  goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+  description: `A quiet cozy and picturesque that hides behind a a river`
 };
 
-it(`Card title success click and hover`, () => {
-  const titleClickHandler = jest.fn();
-  const cardClickHandler = jest.fn();
+describe(`Card selection works correct`, () => {
+  it(`Card mouseEnter and mouseLeave success`, () => {
+    const toggleFavoriteHotelHandler = jest.fn();
+    const changeActiveOfferHandler = jest.fn();
 
-  const cardScreen = shallow(
-      <Card
-        offer = {offerData}
-        onTitleClick = {titleClickHandler}
-        onCardClick = {cardClickHandler}
-      />);
+    const cardScreen = shallow(
+        <Card
+          offer = {offerData}
+          toggleFavoriteHotel = {toggleFavoriteHotelHandler}
+          changeActiveOffer = {changeActiveOfferHandler}
+        />);
 
-  cardScreen.find(`.place-card__name a`).simulate(`click`);
-  cardScreen.find(`.cities__place-card`).simulate(`click`);
+    const cardItem = cardScreen.find(`article.place-card`);
 
-  expect(titleClickHandler).toHaveBeenCalledTimes(1);
-  expect(cardClickHandler).toHaveBeenCalledTimes(1);
-  expect(cardClickHandler).toHaveBeenCalledWith(offerData.id);
+    cardItem.simulate(`mouseEnter`);
+    cardItem.simulate(`mouseLeave`);
+    cardItem.simulate(`mouseEnter`);
+
+    expect(changeActiveOfferHandler).toHaveBeenCalledTimes(3);
+    expect(changeActiveOfferHandler).toHaveBeenNthCalledWith(1, offerData.id);
+    expect(changeActiveOfferHandler).toHaveBeenNthCalledWith(2, null);
+    expect(changeActiveOfferHandler).toHaveBeenNthCalledWith(3, offerData.id);
+  });
+
+  it(`Card adds to favorite successfully`, () => {
+    const toggleFavoriteHotelHandler = jest.fn();
+    const changeActiveOfferHandler = jest.fn();
+
+    const cardScreen = shallow(
+        <Card
+          offer = {offerData}
+          toggleFavoriteHotel = {toggleFavoriteHotelHandler}
+          changeActiveOffer = {changeActiveOfferHandler}
+        />);
+
+    const addToFavoriteButton = cardScreen.find(`.place-card__bookmark-button`);
+
+    addToFavoriteButton.simulate(`click`);
+    addToFavoriteButton.simulate(`click`);
+    addToFavoriteButton.simulate(`click`);
+
+    expect(toggleFavoriteHotelHandler).toHaveBeenCalledTimes(3);
+    expect(toggleFavoriteHotelHandler).toHaveBeenNthCalledWith(1, offerData.id, false);
+  });
 });

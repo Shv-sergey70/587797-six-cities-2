@@ -1,11 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`City correctly renders 1`] = `
+exports[`City correctly renders City is active 1`] = `
 <li
   className="locations__item"
 >
   <a
     className="locations__item-link tabs__item tabs__item--active"
+    href="#"
+    onClick={[Function]}
+  >
+    <span>
+      Paris
+    </span>
+  </a>
+</li>
+`;
+
+exports[`City correctly renders City is not active 1`] = `
+<li
+  className="locations__item"
+>
+  <a
+    className="locations__item-link tabs__item "
     href="#"
     onClick={[Function]}
   >

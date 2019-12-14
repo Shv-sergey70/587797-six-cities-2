@@ -20,7 +20,7 @@ const withOpen = (Component) => {
       return <Component
         {...this.props}
         isOpen={isOpen}
-        onOpenStateChange={this._handleOpenStateChange}
+        openStateChange={this._handleOpenStateChange}
       />;
     }
 

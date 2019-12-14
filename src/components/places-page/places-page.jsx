@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import Map from "../map/map";
-import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
+import CitiesList from "../cities-list/cities-list";
 import offerPropTypes from "../../prop-types/offer";
 import Selectors from "../../selector";
 import OffersList from "../offers-list/offers-list";
 import Sort from "../sort/sort";
 import {withOpen} from "../../hocs/with-open/with-open";
+import cityPropTypes from '../../prop-types/city';
 
 const SortWrapped = withOpen(Sort);
 
@@ -21,9 +22,7 @@ const PlacesPage = (props) => {
     <h1 className="visually-hidden">Cities</h1>
     <div className="tabs">
       <section className="locations container">
-        <CitiesList
-          defaultActiveItem={currentCity}
-        />
+        <CitiesList/>
       </section>
     </div>
     <div className="cities">

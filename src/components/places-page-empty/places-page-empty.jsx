@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import CitiesList, {cityPropTypes} from "../cities-list/cities-list";
+import CitiesList from "../cities-list/cities-list";
+import cityPropTypes from '../../prop-types/city';
 
 const PlacesPageEmpty = (props) => {
   const {
@@ -12,9 +13,7 @@ const PlacesPageEmpty = (props) => {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          <CitiesList
-            defaultActiveItem={currentCity}
-          />
+          <CitiesList/>
         </ul>
       </section>
     </div>

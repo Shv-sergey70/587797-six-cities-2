@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HoC with-auth-form correctly renders 1`] = `
+<div>
+  TEST
+  <input
+    name="testName"
+    onChange={[Function]}
+    value="testValue"
+  />
+</div>
+`;

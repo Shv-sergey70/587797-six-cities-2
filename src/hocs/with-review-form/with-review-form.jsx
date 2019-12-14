@@ -44,7 +44,6 @@ const withReviewForm = (Component) => {
     }
 
     _resetForm() {
-      console.log(`Reset`);
       this.setState({
         review: ``,
         rating: null

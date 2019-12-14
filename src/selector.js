@@ -32,7 +32,6 @@ const getSortedCurrentComments = (comments) => {
 };
 
 const currentOfferDetail = (state) => state.currentOfferDetail;
-const currentOffers = (state) => state.currentOffers;
 const currentCity = (state) => state.currentCity;
 const allOffers = (state) => state.offers;
 const favoriteOffers = (state) => state.favoriteOffers;
@@ -40,11 +39,13 @@ const authData = (state) => state.authData;
 const sortingType = (state) => state.sortingType;
 const currentComments = (state) => state.currentComments;
 
+const getCurrentOffersSelector = createSelector([currentCity, allOffers, sortingType], (city, offers, sort) => getOffersByCity(city, offers, sort));
+
 export default {
   isUserAuthorized: createSelector([authData], (data) => !data),
   getUserEmail: createSelector([authData], (data) => data ? data.email : null),
-  getCurrentOffers: createSelector([currentCity, allOffers, sortingType], (city, offers, sort) => getOffersByCity(city, offers, sort)),
+  getCurrentOffers: getCurrentOffersSelector,
   getFavoriteOffersByCities: createSelector([favoriteOffers], getOffersByCities),
-  getNearestOffers: createSelector([currentOffers, currentOfferDetail], getNearestOffers),
+  getNearestOffers: createSelector([getCurrentOffersSelector, currentOfferDetail], getNearestOffers),
   getSortedCurrentComments: createSelector([currentComments], getSortedCurrentComments)
 };

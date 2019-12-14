@@ -1,31 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {getRatingPercent} from "../../utils";
-import {MAX_RATING_VALUE, FavoritesStatus} from "../../const/common";
+import {MAX_RATING_VALUE} from "../../const/rating";
 import Operation from "../../operation";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import offerPropTypes from '../../prop-types/offer';
 
 class FavoritesItemOffer extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._removeFromFavorites = this._removeFromFavorites.bind(this);
+    this._favoriteButtonClickHandler = this._favoriteButtonClickHandler.bind(this);
+  }
+
+  _favoriteButtonClickHandler() {
+    const {
+      toggleFavoriteHotel,
+      offer: {
+        id
+      }
+    } = this.props;
+
+    toggleFavoriteHotel(id, false);
   }
 
   render() {
     const {
-      offer
+      offer: {
+        id,
+        title,
+        previewImage,
+        price,
+        type,
+        rating
+      }
     } = this.props;
-
-    const {
-      id,
-      title,
-      previewImage,
-      price,
-      type,
-      rating
-    } = offer;
 
     return <article className="favorites__card place-card" key={`favorite-item${id}`}>
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -40,7 +50,7 @@ class FavoritesItemOffer extends React.PureComponent {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button"
-            onClick={() => this._removeFromFavorites(id)}>
+            onClick={this._favoriteButtonClickHandler}>
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref={`#icon-bookmark`}/>
             </svg>
@@ -60,18 +70,10 @@ class FavoritesItemOffer extends React.PureComponent {
       </div>
     </article>;
   }
-
-  _removeFromFavorites(id) {
-    const {
-      toggleFavoriteHotel
-    } = this.props;
-
-    toggleFavoriteHotel(id, FavoritesStatus.UNSET);
-  };
 }
 
 FavoritesItemOffer.propTypes = {
-  offer: PropTypes.object.isRequired, // fix it
+  offer: offerPropTypes,
   toggleFavoriteHotel: PropTypes.func.isRequired
 };
 

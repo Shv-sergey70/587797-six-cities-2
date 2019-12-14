@@ -12,6 +12,28 @@ class Sort extends React.PureComponent {
     this._getSortDescription = this._getSortDescription.bind(this);
   }
 
+  _onMenuClick() {
+    const {
+      isOpen,
+      openStateChange
+    } = this.props;
+
+    openStateChange(!isOpen);
+  }
+
+  _getSortDescription(sortType) {
+    const {
+      activeSortingType,
+      changeSortingType,
+      openStateChange
+    } = this.props;
+
+    return <li key={sortType.name} className={`places__option ${activeSortingType.name === sortType.name ? `places__option--active` : ``}`} tabIndex="0" onClick={() => {
+      changeSortingType(sortType);
+      openStateChange(false);
+    }}>{sortType.text}</li>;
+  }
+
   render() {
     const {
       activeSortingType,
@@ -31,33 +53,11 @@ class Sort extends React.PureComponent {
       </ul>
     </form>;
   }
-
-  _onMenuClick() {
-    const {
-      isOpen,
-      onOpenStateChange
-    } = this.props;
-
-    onOpenStateChange(!isOpen);
-  }
-
-  _getSortDescription(sortType) {
-    const {
-      activeSortingType,
-      changeSortingType,
-      onOpenStateChange
-    } = this.props;
-
-    return <li key={sortType.name} className={`places__option ${activeSortingType.name === sortType.name ? `places__option--active` : ``}`} tabIndex="0" onClick={() => {
-      changeSortingType(sortType);
-      onOpenStateChange(false);
-    }}>{sortType.text}</li>;
-  }
 }
 
 Sort.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  onOpenStateChange: PropTypes.func.isRequired,
+  openStateChange: PropTypes.func.isRequired,
   activeSortingType: PropTypes.exact({
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired

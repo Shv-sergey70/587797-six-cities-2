@@ -4,44 +4,41 @@ exports[`Cities list correctly renders 1`] = `
 <ul
   className="locations__list tabs__list"
 >
-  <li
-    className="locations__item"
-  >
-    <a
-      className="locations__item-link tabs__item tabs__item--active"
-      href="#"
-      onClick={[Function]}
-    >
-      <span>
-        Paris
-      </span>
-    </a>
-  </li>
-  <li
-    className="locations__item"
-  >
-    <a
-      className="locations__item-link tabs__item "
-      href="#"
-      onClick={[Function]}
-    >
-      <span>
-        Amsterdam
-      </span>
-    </a>
-  </li>
-  <li
-    className="locations__item"
-  >
-    <a
-      className="locations__item-link tabs__item "
-      href="#"
-      onClick={[Function]}
-    >
-      <span>
-        Hamburg
-      </span>
-    </a>
-  </li>
+  <City
+    city={
+      Object {
+        "location": Object {
+          "latitude": 11,
+          "longitude": 22,
+          "zoom": 10,
+        },
+        "name": "Paris",
+      }
+    }
+  />
+  <City
+    city={
+      Object {
+        "location": Object {
+          "latitude": 11,
+          "longitude": 22,
+          "zoom": 10,
+        },
+        "name": "Brussels",
+      }
+    }
+  />
+  <City
+    city={
+      Object {
+        "location": Object {
+          "latitude": 11,
+          "longitude": 22,
+          "zoom": 10,
+        },
+        "name": "Amsterdam",
+      }
+    }
+  />
 </ul>
 `;
