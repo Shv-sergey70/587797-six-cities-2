@@ -19,7 +19,7 @@ const FavoritesListItem = (props) => {
     </div>
     <div className="favorites__places">
       {offers.map((offer) => <FavoritesItemOffer
-        key={`${cityName}-${offer.id}`}
+        key={`${cityName}-${offer.id}-${offer.isFavorite}`}
         offer={offer}
       />
       )}

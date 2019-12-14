@@ -187,7 +187,7 @@ class OfferDetail extends React.PureComponent {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {nearestOffers.map((offer, i) => <Card
-                key={`${offer.id}-${i}`}
+                key={`${offer.id}-${i}-${offer.isFavorite}`}
                 offer={offer}
                 changeActiveOffer={() => {}}
               />)}
