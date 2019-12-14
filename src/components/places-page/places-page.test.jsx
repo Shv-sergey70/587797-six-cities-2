@@ -24,7 +24,8 @@ const offersData = [
     description: `A quiet cozy and picturesque that hides behind a a river`,
     location: {
       latitude: 123,
-      longitude: 456
+      longitude: 456,
+      zoom: 10
     }
   },
   {
@@ -43,7 +44,8 @@ const offersData = [
     description: `A quiet cozy and picturesque that hides behind a a river1`,
     location: {
       latitude: 123,
-      longitude: 456
+      longitude: 456,
+      zoom: 10
     }
   }
 ];

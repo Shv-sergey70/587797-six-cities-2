@@ -41,7 +41,7 @@ exports[`Places page correctly renders 1`] = `
         </b>
         <Sort
           isOpen={false}
-          onOpenStateChange={[Function]}
+          openStateChange={[Function]}
         />
         <OffersList
           offers={
@@ -68,6 +68,7 @@ exports[`Places page correctly renders 1`] = `
                 "location": Object {
                   "latitude": 123,
                   "longitude": 456,
+                  "zoom": 10,
                 },
                 "maxAdults": 2,
                 "previewImage": "/img/apartment-01.jpg",
@@ -97,6 +98,7 @@ exports[`Places page correctly renders 1`] = `
                 "location": Object {
                   "latitude": 123,
                   "longitude": 456,
+                  "zoom": 10,
                 },
                 "maxAdults": 3,
                 "previewImage": "/img/apartment-01.jpg",
@@ -121,10 +123,12 @@ exports[`Places page correctly renders 1`] = `
                 Object {
                   "latitude": 123,
                   "longitude": 456,
+                  "zoom": 10,
                 },
                 Object {
                   "latitude": 123,
                   "longitude": 456,
+                  "zoom": 10,
                 },
               ]
             }

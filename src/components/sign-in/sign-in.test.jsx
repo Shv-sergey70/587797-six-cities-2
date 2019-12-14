@@ -3,6 +3,9 @@ import renderer from 'react-test-renderer';
 import {SignIn} from "./sign-in";
 
 jest.mock(`../page-header/page-header.jsx`, () => `PageHeader`);
+jest.mock(`../../notifier`, () => ({
+  error: jest.fn(),
+}));
 
 it(`Sign-in page renders correctly`, () => {
   const tree = renderer.create(<SignIn

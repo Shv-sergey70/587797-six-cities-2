@@ -12,7 +12,7 @@ describe(`Menu behavior test`, () => {
     const sortScreen = shallow(
         <Sort
           isOpen={false}
-          onOpenStateChange={openStateChangeHandler}
+          openStateChange={openStateChangeHandler}
           activeSortingType={{
             name: `POPULAR`,
             text: `Popular`
@@ -32,7 +32,7 @@ describe(`Menu behavior test`, () => {
     const sortScreen = shallow(
         <Sort
           isOpen={true}
-          onOpenStateChange={openStateChangeHandler}
+          openStateChange={openStateChangeHandler}
           activeSortingType={{
             name: `POPULAR`,
             text: `Popular`
@@ -55,7 +55,7 @@ describe(`Sort list behavior test`, () => {
     const sortScreen = shallow(
         <Sort
           isOpen={true}
-          onOpenStateChange={openStateChangeHandler}
+          openStateChange={openStateChangeHandler}
           activeSortingType={{
             name: `PRICE_LOW_TO_HIGH`,
             text: `Price: low to high`

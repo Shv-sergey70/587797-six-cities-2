@@ -1,21 +1,11 @@
 import {getOffersByCity, getRatingPercent, getUniqueCities} from "./utils";
 
 const cities = [
-  {
-    name: `Paris`
-  },
-  {
-    name: `Brussels`
-  },
-  {
-    name: `Cologne`
-  },
-  {
-    name: `Amsterdam`
-  },
-  {
-    name: `Hamburg`
-  }
+  {name: `Paris`},
+  {name: `Brussels`},
+  {name: `Cologne`},
+  {name: `Amsterdam`},
+  {name: `Hamburg`}
 ];
 
 const offersData = [
@@ -78,6 +68,6 @@ describe(`getRatingPercent correctly works`, () => {
   });
 
   it(`normal work with float rating`, () => {
-    expect(getRatingPercent(4.2, 5)).toEqual(84);
+    expect(getRatingPercent(4.2, 5)).toEqual(80);
   });
 });

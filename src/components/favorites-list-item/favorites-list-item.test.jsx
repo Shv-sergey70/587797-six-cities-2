@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {FavoritesListItem} from "./favorites-list-item";
+import FavoritesListItem from "./favorites-list-item";
 
 jest.mock(`../favorites-item-offer/favorites-item-offer.jsx`, () => `FavoritesItemOffer`);
 
