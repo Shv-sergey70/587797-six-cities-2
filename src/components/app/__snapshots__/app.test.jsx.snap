@@ -1,62 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App correctly renders 1`] = `
-<Connect(MainPage)
-  allOffers={
-    Array [
-      Object {
-        "city": Object {
-          "name": "Paris",
-        },
-        "id": 1,
-        "isFavorite": true,
-        "isPremium": true,
-        "previewImage": "/img/apartment-01.jpg",
-        "price": 80,
-        "rating": 4.5,
-        "title": "Beautiful & luxurious apartment at great location",
-        "type": "Apartment",
+exports[`Main page with offer renders correctly 1`] = `
+<MainPage
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
       },
-      Object {
-        "city": Object {
-          "name": "Brussels",
-        },
-        "id": 2,
-        "isFavorite": false,
-        "isPremium": true,
-        "previewImage": "/img/apartment-01.jpg",
-        "price": 180,
-        "rating": 4,
-        "title": "Wood and stone place",
-        "type": "Private room",
-      },
-      Object {
-        "city": Object {
-          "name": "Paris",
-        },
-        "id": 3,
-        "isFavorite": true,
-        "isPremium": false,
-        "previewImage": "/img/apartment-02.jpg",
-        "price": 120,
-        "rating": 5,
-        "title": "Canal View Prinsengracht",
-        "type": "Apartment",
-      },
-      Object {
-        "city": Object {
-          "name": "Amsterdam",
-        },
-        "id": 4,
-        "isFavorite": false,
-        "isPremium": false,
-        "previewImage": "/img/apartment-03.jpg",
-        "price": 40,
-        "rating": 3,
-        "title": "Nice, cozy, warm big bed apartment",
-        "type": "Private room",
-      },
-    ]
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+  location={
+    Object {
+      "hash": "",
+      "pathname": "/",
+      "search": "",
+      "state": undefined,
+    }
+  }
+  match={
+    Object {
+      "isExact": true,
+      "params": Object {},
+      "path": "/",
+      "url": "/",
+    }
   }
 />
 `;

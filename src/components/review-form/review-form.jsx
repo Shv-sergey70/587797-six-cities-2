@@ -18,6 +18,31 @@ class ReviewForm extends React.PureComponent {
     this._onFormSubmit = this._onFormSubmit.bind(this);
   }
 
+  _onFormSubmit(evt) {
+    evt.preventDefault();
+
+    const {
+      offerId,
+      review,
+      rating,
+      addReview,
+      resetForm
+    } = this.props;
+
+    addReview(offerId, rating, review)
+      .then(() => resetForm())
+      .catch(() => notifier.error(`Возникла ошибка, попробуйте позже`));
+  }
+
+  _isFormValid() {
+    const {
+      review,
+      rating
+    } = this.props;
+
+    return review.length > CommentFieldLength.MIN && review.length <= CommentFieldLength.MAX && rating;
+  }
+
   render() {
     const {
       review,
@@ -55,38 +80,12 @@ class ReviewForm extends React.PureComponent {
       </div>
     </form>;
   }
-
-  _onFormSubmit(evt) {
-    evt.preventDefault();
-
-    const {
-      offerId,
-      review,
-      rating,
-      addReview,
-      resetForm
-    } = this.props;
-
-    addReview(offerId, rating, review)
-      .then(() => resetForm())
-      .catch(() => notifier.error(`Возникла ошибка, попробуйте позже`));
-  }
-
-  _isFormValid() {
-    const {
-      review,
-      rating
-    } = this.props;
-
-    return review.length > CommentFieldLength.MIN && review.length <= CommentFieldLength.MAX && rating;
-  }
 }
 
 ReviewForm.propTypes = {
   offerId: PropTypes.number,
   review: PropTypes.string,
   rating: PropTypes.string,
-  password: PropTypes.string,
   onCommentChange: PropTypes.func.isRequired,
   onRatingClick: PropTypes.func.isRequired,
   addReview: PropTypes.func.isRequired,
