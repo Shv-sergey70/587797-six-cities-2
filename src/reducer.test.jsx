@@ -1,4 +1,7 @@
 import {reducer} from "./reducer";
+import {SortingType} from "./const/common";
+import UserModel from "./entities/user-model";
+import OfferModel from "./entities/offer-model";
 
 const cities = [
   {
@@ -54,11 +57,61 @@ const offersMock = [
   }
 ];
 
+const offersWithModelsMock = [
+  new OfferModel({
+    id: 1,
+    city: cities[0],
+    title: `Beautiful & luxurious apartment at great location`,
+    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
+    bedrooms: 2,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    type: `Apartment`,
+    price: 80,
+    rating: 4.5,
+    host: new UserModel({
+      isPro: true,
+      name: `Angelina`,
+      avatar: `/img/avatar-angelina.jpg`
+    }),
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
+  }),
+  new OfferModel({
+    id: 5,
+    city: cities[1],
+    title: `Nice, cozy, warm big bed apartment`,
+    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
+    bedrooms: 2,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    type: `Apartment`,
+    price: 180,
+    rating: 5,
+    host: new UserModel({
+      isPro: true,
+      name: `Angelina`,
+      avatar: `/img/avatar-angelina.jpg`
+    }),
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.919309666406198
+    }
+  })
+];
+
 const defaultInitialState = {
   cities: [],
-  currentCity: {},
   offers: [],
-  authData: {}
+  favoriteOffers: [],
+  currentCity: {},
+  currentOfferDetail: null,
+  currentComments: [],
+  activeOfferLocation: null,
+  authData: {},
+  sortingType: SortingType.POPULAR
 };
 
 describe(`Reducer works correctly`, () => {
@@ -76,9 +129,14 @@ describe(`Reducer works correctly`, () => {
       payload: currentCity
     })).toEqual({
       cities: [],
-      currentCity,
       offers: [],
-      authData: {}
+      favoriteOffers: [],
+      currentCity,
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: SortingType.POPULAR
     });
   });
 
@@ -89,8 +147,13 @@ describe(`Reducer works correctly`, () => {
     })).toEqual({
       cities,
       currentCity: cities[0],
-      offers: offersMock,
-      authData: {}
+      offers: offersWithModelsMock,
+      favoriteOffers: [],
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: SortingType.POPULAR
     });
   });
 
@@ -107,7 +170,12 @@ describe(`Reducer works correctly`, () => {
       cities: [],
       currentCity: {},
       offers: [],
-      authData
+      authData,
+      favoriteOffers: [],
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: null,
+      sortingType: SortingType.POPULAR
     });
   });
 });

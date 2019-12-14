@@ -28,8 +28,7 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         offers,
         currentCity: action.payload[0].city,
-        cities: getUniqueCities(action.payload),
-        currentOffers: getOffersByCity(action.payload[0].city, offers),
+        cities: getUniqueCities(action.payload)
       });
     case ActionType.AUTHORIZE:
       return Object.assign({}, state, {

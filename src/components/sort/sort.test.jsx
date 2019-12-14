@@ -6,7 +6,7 @@ describe(`Sort section renders`, () => {
   it(`Sort section is open`, () => {
     const tree = renderer.create(<Sort
       isOpen={true}
-      onOpenStateChange={jest.fn()}
+      openStateChange={jest.fn()}
       activeSortingType={{
         name: `POPULAR`,
         text: `Popular`
@@ -20,7 +20,7 @@ describe(`Sort section renders`, () => {
   it(`Sort section is closed`, () => {
     const tree = renderer.create(<Sort
       isOpen={false}
-      onOpenStateChange={jest.fn()}
+      openStateChange={jest.fn()}
       activeSortingType={{
         name: `PRICE_HIGH_TO_LOW`,
         text: `Price: high to low`
