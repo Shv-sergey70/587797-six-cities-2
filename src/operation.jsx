@@ -21,9 +21,7 @@ export default {
   },
   loadFavorites: () => (dispatch, _getState, api) => {
     return api.get(ApiRoute.FAVORITE)
-      .then((response) => {
-        dispatch(ActionCreator.loadFavorites(response.data));
-      });
+      .then((response) => dispatch(ActionCreator.loadFavorites(response.data)));
   },
   toggleFavoriteHotel: (hotelId, isSetFavorite) => (dispatch, _getState, api) => {
     return api.post(`${ApiRoute.FAVORITE}/${hotelId}/${Number(isSetFavorite)}`)

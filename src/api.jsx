@@ -14,7 +14,6 @@ const configureAPI = () => {
 
   const onFail = (err) => {
     if ((err.status === 401 || (err.response && err.response.status === 401)) && isPrivateRoute(err.config.method, err.config.url)) {
-      console.log(401);
       history.push(Route.LOGIN);
     }
   };
