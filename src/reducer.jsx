@@ -1,6 +1,6 @@
 import OfferModel from "./entities/offer-model";
 import {ActionType} from './const/action';
-import {getOffersByCity, getUniqueCities} from "./utils";
+import {getUniqueCities} from "./utils";
 import CommentModel from "./entities/comment-model";
 import {SortingType} from "./const/common";
 
