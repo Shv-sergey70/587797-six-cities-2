@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HoC with-open correctly renders 1`] = `
+<div
+  onClick={[Function]}
+>
+  TEST
+</div>
+`;
