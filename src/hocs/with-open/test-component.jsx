@@ -8,8 +8,8 @@ const TestComponent = (props) => {
   } = props;
 
   return <div onClick={() => {
-    openStateChange(true)}
-  }>TEST</div>;
+    openStateChange(true);
+  }}>TEST</div>;
 };
 
 TestComponent.propTypes = {
