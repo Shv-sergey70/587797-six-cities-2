@@ -1,106 +1,5 @@
 import {reducer} from "./reducer";
-import {SortingType} from "./const/common";
-import UserModel from "./entities/user-model";
-import OfferModel from "./entities/offer-model";
-
-const cities = [
-  {
-    name: `Paris`
-  },
-  {
-    name: `Brussels`
-  }
-];
-
-const offersMock = [
-  {
-    id: 1,
-    city: cities[0],
-    title: `Beautiful & luxurious apartment at great location`,
-    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
-    bedrooms: 2,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-    type: `Apartment`,
-    price: 80,
-    rating: 4.5,
-    host: {
-      isPro: true,
-      name: `Angelina`,
-      avatar: `/img/avatar-angelina.jpg`
-    },
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198
-    }
-  },
-  {
-    id: 5,
-    city: cities[1],
-    title: `Nice, cozy, warm big bed apartment`,
-    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
-    bedrooms: 2,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-    type: `Apartment`,
-    price: 180,
-    rating: 5,
-    host: {
-      isPro: true,
-      name: `Angelina`,
-      avatar: `/img/avatar-angelina.jpg`
-    },
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    location: {
-      latitude: 52.3909553943508,
-      longitude: 4.919309666406198
-    }
-  }
-];
-
-const offersWithModelsMock = [
-  new OfferModel({
-    id: 1,
-    city: cities[0],
-    title: `Beautiful & luxurious apartment at great location`,
-    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
-    bedrooms: 2,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-    type: `Apartment`,
-    price: 80,
-    rating: 4.5,
-    host: new UserModel({
-      isPro: true,
-      name: `Angelina`,
-      avatar: `/img/avatar-angelina.jpg`
-    }),
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198
-    }
-  }),
-  new OfferModel({
-    id: 5,
-    city: cities[1],
-    title: `Nice, cozy, warm big bed apartment`,
-    images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
-    bedrooms: 2,
-    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
-    type: `Apartment`,
-    price: 180,
-    rating: 5,
-    host: new UserModel({
-      isPro: true,
-      name: `Angelina`,
-      avatar: `/img/avatar-angelina.jpg`
-    }),
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    location: {
-      latitude: 52.3909553943508,
-      longitude: 4.919309666406198
-    }
-  })
-];
+import {cities, offersMock, offersWithModelsMock, commentsMock, commentsWithModelsMock} from "./reducer-mock-data";
 
 const defaultInitialState = {
   cities: [],
@@ -111,7 +10,10 @@ const defaultInitialState = {
   currentComments: [],
   activeOfferLocation: null,
   authData: {},
-  sortingType: SortingType.POPULAR
+  sortingType: {
+    name: `POPULAR`,
+    text: `Popular`
+  }
 };
 
 describe(`Reducer works correctly`, () => {
@@ -136,7 +38,10 @@ describe(`Reducer works correctly`, () => {
       currentComments: [],
       activeOfferLocation: null,
       authData: {},
-      sortingType: SortingType.POPULAR
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
     });
   });
 
@@ -153,7 +58,10 @@ describe(`Reducer works correctly`, () => {
       currentComments: [],
       activeOfferLocation: null,
       authData: {},
-      sortingType: SortingType.POPULAR
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
     });
   });
 
@@ -175,7 +83,116 @@ describe(`Reducer works correctly`, () => {
       currentOfferDetail: null,
       currentComments: [],
       activeOfferLocation: null,
-      sortingType: SortingType.POPULAR
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
+    });
+  });
+
+  it(`Reducer with LOAD_FAVORITES action should change favoriteOffers in state`, () => {
+    expect(reducer(defaultInitialState, {
+      type: `LOAD_FAVORITES`,
+      payload: offersMock
+    })).toEqual({
+      cities: [],
+      offers: [],
+      favoriteOffers: offersWithModelsMock,
+      currentCity: {},
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
+    });
+  });
+
+  it(`Reducer with CHANGE_ACTIVE_OFFER action should change activeOfferLocation in state`, () => {
+    const offerId = 5;
+
+    expect(reducer(Object.assign({}, defaultInitialState, {offers: offersWithModelsMock}), {
+      type: `CHANGE_ACTIVE_OFFER`,
+      payload: offerId
+    })).toEqual({
+      cities: [],
+      offers: offersWithModelsMock,
+      favoriteOffers: [],
+      currentCity: {},
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: offersWithModelsMock.find((offer) => offer.id === offerId).location,
+      authData: {},
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
+    });
+  });
+
+  it(`Reducer with SET_CURRENT_OFFER_DETAIL action should change currentOfferDetail in state`, () => {
+    const offerId = 5;
+
+    expect(reducer(Object.assign({}, defaultInitialState, {offers: offersWithModelsMock}), {
+      type: `SET_CURRENT_OFFER_DETAIL`,
+      payload: offerId
+    })).toEqual({
+      cities: [],
+      offers: offersWithModelsMock,
+      favoriteOffers: [],
+      currentCity: {},
+      currentOfferDetail: offersWithModelsMock.find((offer) => offer.id === offerId),
+      currentComments: [],
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
+    });
+  });
+
+  it(`Reducer with LOAD_COMMENTS_FOR_OFFER action should change currentComments in state`, () => {
+    expect(reducer(defaultInitialState, {
+      type: `LOAD_COMMENTS_FOR_OFFER`,
+      payload: commentsMock
+    })).toEqual({
+      cities: [],
+      offers: [],
+      favoriteOffers: [],
+      currentCity: {},
+      currentOfferDetail: null,
+      currentComments: commentsWithModelsMock,
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
+    });
+  });
+
+  it(`Reducer with CHANGE_SORTING_TYPE action should change sortingType in state`, () => {
+    const newSortingType = {
+      name: `PRICE_LOW_TO_HIGH`,
+      text: `Price: low to high`
+    };
+
+    expect(reducer(defaultInitialState, {
+      type: `CHANGE_SORTING_TYPE`,
+      payload: newSortingType
+    })).toEqual({
+      cities: [],
+      offers: [],
+      favoriteOffers: [],
+      currentCity: {},
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: newSortingType
     });
   });
 });
