@@ -1,4 +1,4 @@
-import ActionType from './const/action';
+import {ActionType} from './const/action';
 
 export default {
   changeCity: (chosenCity) => ({

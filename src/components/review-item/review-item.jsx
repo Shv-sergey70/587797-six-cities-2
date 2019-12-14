@@ -1,6 +1,6 @@
 import React from 'react';
 import {getRatingPercent} from "../../utils";
-import {MAX_RATING_VALUE} from "../../const/common";
+import {MAX_RATING_VALUE} from "../../const/rating";
 import moment from 'moment';
 import commentPropTypes from "../../prop-types/comment";
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MAX_RATING_VALUE} from "../../const/common";
+import {MAX_RATING_VALUE} from "../../const/rating";
 import {connect} from "react-redux";
 import Operation from "../../operation";
 import {getRatingPercent} from "../../utils";

@@ -1,3 +1,5 @@
+export const MAX_RATING_VALUE = 5;
+
 export const RatingItem = {
   PERFECT: {
     text: `perfect`,
