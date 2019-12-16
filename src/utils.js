@@ -59,3 +59,7 @@ export const isPrivateRoute = (method, url) => {
 export const areLocationsEquals = (location1, location2) => {
   return location1.latitude === location2.latitude && location1.longitude === location2.longitude;
 };
+
+export const getRandomElementFromArray = (array) => {
+  return array[Math.floor(Math.random() * array.length)];
+};

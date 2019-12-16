@@ -1,6 +1,6 @@
 import OfferModel from "./entities/offer-model";
 import {ActionType} from './const/action';
-import {getUniqueCities} from "./utils";
+import {getRandomElementFromArray, getUniqueCities} from "./utils";
 import CommentModel from "./entities/comment-model";
 import {SortingType} from "./const/common";
 
@@ -25,9 +25,10 @@ export const reducer = (state = initialState, action) => {
     }
     case ActionType.LOAD_OFFERS:
       const offers = action.payload.map((offer) => new OfferModel(offer));
+
       return Object.assign({}, state, {
         offers,
-        currentCity: action.payload[0].city,
+        currentCity: getRandomElementFromArray(getUniqueCities(offers)),
         cities: getUniqueCities(action.payload)
       });
     case ActionType.AUTHORIZE:

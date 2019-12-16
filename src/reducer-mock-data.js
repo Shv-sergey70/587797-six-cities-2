@@ -3,12 +3,7 @@ import UserModel from "./entities/user-model";
 import CommentModel from "./entities/comment-model";
 
 const cities = [
-  {
-    name: `Paris`
-  },
-  {
-    name: `Brussels`
-  }
+  {name: `Paris`}
 ];
 
 const offersMock = [
@@ -35,7 +30,7 @@ const offersMock = [
   },
   {
     id: 5,
-    city: cities[1],
+    city: cities[0],
     title: `Nice, cozy, warm big bed apartment`,
     images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
     bedrooms: 2,
@@ -80,7 +75,7 @@ const offersWithModelsMock = [
   }),
   new OfferModel({
     id: 5,
-    city: cities[1],
+    city: cities[0],
     title: `Nice, cozy, warm big bed apartment`,
     images: [`/img/room.jpg`, `/img/apartment-01.jpg`, `/img/apartment-01.jpg`, `/img/studio-01.jpg`],
     bedrooms: 2,
