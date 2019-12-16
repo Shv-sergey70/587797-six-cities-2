@@ -5,6 +5,7 @@ exports[`OfferList correctly renders 1`] = `
   className="cities__places-list places__list tabs__content"
 >
   <Card
+    changeActiveOffer={[MockFunction]}
     offer={
       Object {
         "bedrooms": 2,
@@ -35,6 +36,7 @@ exports[`OfferList correctly renders 1`] = `
     }
   />
   <Card
+    changeActiveOffer={[MockFunction]}
     offer={
       Object {
         "bedrooms": 5,
@@ -64,6 +66,7 @@ exports[`OfferList correctly renders 1`] = `
     }
   />
   <Card
+    changeActiveOffer={[MockFunction]}
     offer={
       Object {
         "bedrooms": 5,

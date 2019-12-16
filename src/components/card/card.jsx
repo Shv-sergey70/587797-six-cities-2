@@ -6,7 +6,6 @@ import Operation from "../../operation";
 import {getRatingPercent} from "../../utils";
 import {Link} from 'react-router-dom';
 import offerPropTypes from '../../prop-types/offer';
-import ActionCreator from "../../action-creator";
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -108,7 +107,6 @@ Card.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleFavoriteHotel: (offerId, isSetFavorite) => dispatch(Operation.toggleFavoriteHotel(offerId, isSetFavorite)),
-  changeActiveOffer: (offerId) => dispatch(ActionCreator.changeActiveOffer(offerId))
 });
 
 export {Card};
