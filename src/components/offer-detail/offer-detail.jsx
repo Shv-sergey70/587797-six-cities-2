@@ -23,20 +23,20 @@ class OfferDetail extends React.PureComponent {
     this._currentOfferId = Number(props.match.params.offerId);
     this._currentOffer = null;
 
-    this._loadDataForOffer = this._loadDataForOffer.bind(this);
+    this._handleLoadDataForOffer = this._handleLoadDataForOffer.bind(this);
     this._getImagesForRender = this._getImagesForRender.bind(this);
     this._handleToggleFavoriteButtonClick = this._handleToggleFavoriteButtonClick.bind(this);
   }
 
   componentDidMount() {
-    this._loadDataForOffer();
+    this._handleLoadDataForOffer();
   }
 
   componentDidUpdate() {
-    this._loadDataForOffer();
+    this._handleLoadDataForOffer();
   }
 
-  _loadDataForOffer() {
+  _handleLoadDataForOffer() {
     const {
       loadOffersForDetailPage,
       currentOfferDetail,
