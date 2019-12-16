@@ -3,7 +3,7 @@ export const ApiUrl = `https://htmlacademy-react-2.appspot.com/six-cities`;
 export const Route = {
   MAIN: `/`,
   LOGIN: `/login`,
-  FAVORITES: `/favorite`,
+  FAVORITES: `/favorites`,
   OFFER: `/offer/:offerId`
 };
 

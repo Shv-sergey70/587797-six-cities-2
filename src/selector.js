@@ -42,7 +42,7 @@ const currentComments = (state) => state.currentComments;
 const getCurrentOffersSelector = createSelector([currentCity, allOffers, sortingType], (city, offers, sort) => getOffersByCity(city, offers, sort));
 
 export default {
-  isUserAuthorized: createSelector([authData], (data) => !data),
+  isUserAuthorized: createSelector([authData], (data) => Object.keys(data).length !== 0),
   getUserEmail: createSelector([authData], (data) => data ? data.email : null),
   getCurrentOffers: getCurrentOffersSelector,
   getFavoriteOffersByCities: createSelector([favoriteOffers], getOffersByCities),
