@@ -90,14 +90,45 @@ describe(`Reducer works correctly`, () => {
     });
   });
 
+  it(`Reducer with TOGGLE_FAVORITE_HOTEL action should change favoriteOffers and offers in state`, () => {
+    const payload = {
+      hotelId: 1,
+      isSetFavorite: true
+    };
+
+    const newOffersData = offersWithModelsMock.slice();
+    newOffersData.find((offer) => offer.id === payload.hotelId).isFavorite = payload.isSetFavorite;
+
+    expect(reducer(Object.assign({}, defaultInitialState, {
+      offers: offersWithModelsMock,
+      favoriteOffers: []
+    }), {
+      type: `TOGGLE_FAVORITE_HOTEL`,
+      payload
+    })).toEqual({
+      cities: [],
+      offers: newOffersData,
+      favoriteOffers: [newOffersData[0]],
+      currentCity: {},
+      currentOfferDetail: null,
+      currentComments: [],
+      activeOfferLocation: null,
+      authData: {},
+      sortingType: {
+        name: `POPULAR`,
+        text: `Popular`
+      }
+    });
+  });
+
   it(`Reducer with LOAD_FAVORITES action should change favoriteOffers in state`, () => {
     expect(reducer(defaultInitialState, {
       type: `LOAD_FAVORITES`,
-      payload: offersMock
+      payload: [offersMock[1]]
     })).toEqual({
       cities: [],
       offers: [],
-      favoriteOffers: offersWithModelsMock,
+      favoriteOffers: [offersWithModelsMock[1]],
       currentCity: {},
       currentOfferDetail: null,
       currentComments: [],
