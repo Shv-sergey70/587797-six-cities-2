@@ -1,4 +1,4 @@
-import {getOffersByCity, getRatingPercent, getUniqueCities} from "./utils";
+import {getOffersByCity, getRatingPercent, getUniqueCities, isEmptyObject} from "./utils";
 
 const cities = [
   {name: `Paris`},
@@ -69,5 +69,15 @@ describe(`getRatingPercent correctly works`, () => {
 
   it(`normal work with float rating`, () => {
     expect(getRatingPercent(4.2, 5)).toEqual(80);
+  });
+});
+
+describe(`isEmptyObject correctly works`, () => {
+  it(`object is empty. Will return true`, () => {
+    expect(isEmptyObject({})).toEqual(true);
+  });
+
+  it(`object is not empty. Will return false`, () => {
+    expect(isEmptyObject({name: `test`})).toEqual(false);
   });
 });

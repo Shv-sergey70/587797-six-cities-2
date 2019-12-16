@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {getOffersByCity} from "./utils";
+import {getOffersByCity, isEmptyObject} from "./utils";
 import moment from "moment";
 import {MAX_COMMENTS_FOR_PAGE, MAX_NEAREST_PLACES} from "./const/common";
 
@@ -42,7 +42,7 @@ const currentComments = (state) => state.currentComments;
 const getCurrentOffersSelector = createSelector([currentCity, allOffers, sortingType], (city, offers, sort) => getOffersByCity(city, offers, sort));
 
 export default {
-  isUserAuthorized: createSelector([authData], (data) => Object.keys(data).length !== 0),
+  isUserAuthorized: createSelector([authData], (data) => !isEmptyObject(data)),
   getUserEmail: createSelector([authData], (data) => data ? data.email : null),
   getCurrentOffers: getCurrentOffersSelector,
   getFavoriteOffersByCities: createSelector([favoriteOffers], getOffersByCities),

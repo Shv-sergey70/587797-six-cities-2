@@ -63,3 +63,7 @@ export const areLocationsEquals = (location1, location2) => {
 export const getRandomElementFromArray = (array) => {
   return array[Math.floor(Math.random() * array.length)];
 };
+
+export const isEmptyObject = (object) => {
+  return Object.keys(object).length === 0;
+};
