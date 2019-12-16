@@ -12,6 +12,12 @@ const withOpen = (Component) => {
       this._handleOpenStateChange = this._handleOpenStateChange.bind(this);
     }
 
+    _handleOpenStateChange(isOpen) {
+      this.setState({
+        isOpen
+      });
+    }
+
     render() {
       const {
         isOpen
@@ -22,12 +28,6 @@ const withOpen = (Component) => {
         isOpen={isOpen}
         openStateChange={this._handleOpenStateChange}
       />;
-    }
-
-    _handleOpenStateChange(isOpen) {
-      this.setState({
-        isOpen
-      });
     }
   }
 

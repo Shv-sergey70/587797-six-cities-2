@@ -80,10 +80,6 @@ class Map extends React.PureComponent {
     }
   }
 
-  render() {
-    return <div id="map" style={{height: `100%`}}/>;
-  }
-
   _renderPins() {
     const {offersLocations} = this.props;
 
@@ -114,6 +110,10 @@ class Map extends React.PureComponent {
       this._highlightMarker = leaflet.marker([latitude, longitude], {icon: this._highlightIcon});
       this._highlightMarker.addTo(this._map);
     }
+  }
+
+  render() {
+    return <div id="map" style={{height: `100%`}}/>;
   }
 }
 

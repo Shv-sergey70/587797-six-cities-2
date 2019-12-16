@@ -15,22 +15,6 @@ const withReviewForm = (Component) => {
       this._resetForm = this._resetForm.bind(this);
     }
 
-    render() {
-      const {
-        review,
-        rating
-      } = this.state;
-
-      return <Component
-        {...this.props}
-        review={review}
-        rating={rating}
-        onCommentChange={this._handleCommentTextareaChange}
-        onRatingClick={this._handleRatingInputClick}
-        resetForm={this._resetForm}
-      />;
-    }
-
     _handleCommentTextareaChange(evt) {
       this.setState({
         [evt.target.name]: evt.target.value
@@ -48,6 +32,22 @@ const withReviewForm = (Component) => {
         review: ``,
         rating: null
       });
+    }
+
+    render() {
+      const {
+        review,
+        rating
+      } = this.state;
+
+      return <Component
+        {...this.props}
+        review={review}
+        rating={rating}
+        onCommentChange={this._handleCommentTextareaChange}
+        onRatingClick={this._handleRatingInputClick}
+        resetForm={this._resetForm}
+      />;
     }
   }
 

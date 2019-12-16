@@ -13,6 +13,12 @@ const withAuthForm = (Component) => {
       this._handleInputKeydown = this._handleInputKeydown.bind(this);
     }
 
+    _handleInputKeydown(evt) {
+      this.setState({
+        [evt.target.name]: evt.target.value
+      });
+    }
+
     render() {
       const {
         email,
@@ -25,12 +31,6 @@ const withAuthForm = (Component) => {
         password={password}
         onInputKeydown={this._handleInputKeydown}
       />;
-    }
-
-    _handleInputKeydown(evt) {
-      this.setState({
-        [evt.target.name]: evt.target.value
-      });
     }
   }
 

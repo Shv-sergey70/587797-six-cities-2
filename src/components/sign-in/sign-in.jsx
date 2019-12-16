@@ -16,6 +16,29 @@ class SignIn extends React.PureComponent {
     this._handleSignInButtonClick = this._handleSignInButtonClick.bind(this);
   }
 
+  _handleSignInButtonClick(evt) {
+    evt.preventDefault();
+
+    const {
+      email,
+      password,
+      authorize
+    } = this.props;
+
+    try {
+      if (email.length === 0) {
+        throw new Error(`Email is empty`);
+      } else if (password.length === 0) {
+        throw new Error(`Password is empty`);
+      }
+
+      authorize(email, password);
+      history.push(Route.MAIN);
+    } catch (e) {
+      notifier.error(e.message);
+    }
+  }
+
   render() {
     const {
       email,
@@ -57,29 +80,6 @@ class SignIn extends React.PureComponent {
         </div>
       </main>
     </div>;
-  }
-
-  _handleSignInButtonClick(evt) {
-    evt.preventDefault();
-
-    const {
-      email,
-      password,
-      authorize
-    } = this.props;
-
-    try {
-      if (email.length === 0) {
-        throw new Error(`Email is empty`);
-      } else if (password.length === 0) {
-        throw new Error(`Password is empty`);
-      }
-
-      authorize(email, password);
-      history.push(Route.MAIN);
-    } catch (e) {
-      notifier.error(e.message);
-    }
   }
 }
 

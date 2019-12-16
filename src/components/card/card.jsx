@@ -17,6 +17,34 @@ class Card extends React.PureComponent {
     this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
   }
 
+  _handleToggleFavoriteButtonClick() {
+    const {
+      offer,
+      toggleFavoriteHotel
+    } = this.props;
+
+    toggleFavoriteHotel(offer.id, !offer.isFavorite);
+  }
+
+  _handleCardMouseEnter() {
+    const {
+      offer: {
+        id
+      },
+      changeActiveOffer
+    } = this.props;
+
+    changeActiveOffer(id);
+  }
+
+  _handleCardMouseLeave() {
+    const {
+      changeActiveOffer
+    } = this.props;
+
+    changeActiveOffer(null);
+  }
+
   render() {
     const {
       offer: {
@@ -69,34 +97,6 @@ class Card extends React.PureComponent {
         <p className="place-card__type">{type}</p>
       </div>
     </article>;
-  }
-
-  _handleToggleFavoriteButtonClick() {
-    const {
-      offer,
-      toggleFavoriteHotel
-    } = this.props;
-
-    toggleFavoriteHotel(offer.id, !offer.isFavorite);
-  }
-
-  _handleCardMouseEnter() {
-    const {
-      offer: {
-        id
-      },
-      changeActiveOffer
-    } = this.props;
-
-    changeActiveOffer(id);
-  }
-
-  _handleCardMouseLeave() {
-    const {
-      changeActiveOffer
-    } = this.props;
-
-    changeActiveOffer(null);
   }
 }
 
