@@ -15,10 +15,10 @@ class ReviewForm extends React.PureComponent {
     super(props);
 
     this._isFormValid = this._isFormValid.bind(this);
-    this._onFormSubmit = this._onFormSubmit.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
-  _onFormSubmit(evt) {
+  _handleFormSubmit(evt) {
     evt.preventDefault();
 
     const {
@@ -76,7 +76,7 @@ class ReviewForm extends React.PureComponent {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
           stay with at least <b className="reviews__text-amount">{CommentFieldLength.MIN} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!this._isFormValid()} onClick={this._onFormSubmit}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!this._isFormValid()} onClick={this._handleFormSubmit}>Submit</button>
       </div>
     </form>;
   }

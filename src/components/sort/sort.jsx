@@ -8,11 +8,11 @@ class Sort extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._onMenuClick = this._onMenuClick.bind(this);
+    this._handleMenuClick = this._handleMenuClick.bind(this);
     this._getSortDescription = this._getSortDescription.bind(this);
   }
 
-  _onMenuClick() {
+  _handleMenuClick() {
     const {
       isOpen,
       openStateChange
@@ -42,7 +42,7 @@ class Sort extends React.PureComponent {
 
     return <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
-      <span className="places__sorting-type" tabIndex="0" onClick={this._onMenuClick}>
+      <span className="places__sorting-type" tabIndex="0" onClick={this._handleMenuClick}>
         {activeSortingType.text}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"/>
